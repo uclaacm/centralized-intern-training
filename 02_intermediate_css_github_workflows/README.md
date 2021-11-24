@@ -42,6 +42,44 @@ How can we make websites pretty? In this session, we'll discuss about the design
   - Linting, Github Actions
   - Pull Requests & Code Review
 
+## The Box Model
+
+### Content
+
+### Padding
+
+### Border
+
+### Margin
+
+### Box-Sizing
+
+## Display
+
+### Display:Inline
+
+### Display:Block
+
+## Position
+
+## Float
+
+## Flexbox
+
+### Flex Axis
+
+### Flex Justify Vs. Align
+
+### Content Vs. Items
+
+### Flex Containers Vs. Flex Items
+
+### Flex Grow Vs. Flex Shrink
+
+## CSS Grid
+
+### grid-template-columns and rows
+
 ## Github as a Collaboration Tool
 
 Last week, we saw how Git and Github as a version control system can be used to back your data up, keep track of history, and host your website online. We also learned how to save this history and maintain it locally as well as online. This time, we're going to cover another important feature of Github - using it for collaboration.
@@ -50,7 +88,7 @@ Last week, we saw how Git and Github as a version control system can be used to 
 
 Some useful features Github offers for groups of people working on projects include Organizations, Teams and Projects.
 
-[Organizations](https://docs.github.com/en/organizations) on Github are basically groups of people working on multiple repositories. For an example, we can look at the [ACM at UCLA](https://github.com/uclaacm/) organization, where this repository along with most other repositories we work on are located. 
+[Organizations](https://docs.github.com/en/organizations) on Github are basically groups of people working on multiple repositories. For an example, we can look at the [ACM at UCLA](https://github.com/uclaacm/) organization, where this repository along with most other repositories we work on are located.
 
 Sometimes, Organizations can get a little _large_ (like ACM!). Not everyone in the organization works on every repository, so members are grouped into [Teams](https://docs.github.com/en/organizations/organizing-members-into-teams/about-teams) that work on specific repositories!
 An example of this at ACM is the [Dev Team](https://github.com/orgs/uclaacm/teams/dev-team), which has the repositories we maintain. Teams can also have sub-teams that work on even more specific repos.
@@ -86,28 +124,37 @@ In order to isolate your work from other people's work, you can check out a new 
 ![branch](./images/branch.png)
 
 To see a list of all the branches that exist, you can run
+
 ```sh
 $ git branch
 ```
+
 to see a list of all of the branches that you can change to.
 
 To switch to another branch, you can run
+
 ```sh
 $ git checkout NAME_OF_BRANCH
 ```
+
 which is the same as
+
 ```sh
 $ git switch NAME_OF_BRANCH
 ```
+
 to view another branch!
 
 Before making a new branch, it's important that you always PULL the latest changes to a repository by running
+
 ```sh
 $ git pull
 ```
+
 so that you always get the most up-to-date version of the repository before changing branches!
 
 The way that you can make a new branch is by running
+
 ```sh
 $ git checkout -b NAME_OF_BRANCH
 ```
@@ -115,6 +162,7 @@ $ git checkout -b NAME_OF_BRANCH
 Let's break down what this command does. Git checkout tells git that you want to switch the version of code you are looking at to the one that's contained within the other branch, and the -b command tells git that you want to create a new branch that hasn't existed yet. This creates a new branch in git history that's based off of the branch that you were currently developing in.
 
 The above command is equivalent to
+
 ```sh
 $ git branch NAME_OF_BRANCH
 $ git checkout NAME_OF_BRANCH
@@ -125,9 +173,11 @@ From here, you can do all the development that you want from a new branch, and w
 ### Merging
 
 If you want to "merge" a branch into your current working branch, run
+
 ```sh
 $ git merge NAME_OF_BRANCH
 ```
+
 to merge the contents of the other branch into your current working branch.
 
 This merges NAME_OF_BRANCH into the branch you're currently working on.
