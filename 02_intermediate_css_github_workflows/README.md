@@ -11,14 +11,12 @@ The CSS Sections Are Pulled From The Learning Lab Crash Course!
 
 ## Table of Contents
 
-- [The Box Model](#the-box-model)
+- [The Box Model](#css-box-model)
   - [The Content Area](#the-content-area)
   - [The Padding Area](#the-padding-area)
   - [The Border Area](#the-border-area)
   - [The Margin Area](#the-margin-area)
   - [Padding vs. Margin](#padding-vs-margin)
-  - [Aside: the box-sizing property](#aside-the-box-sizing-property)
-- [display:inline and display:block](#displayinline-and-displayblock)
 - [The position property](#the-position-property)
   - [A quick aside on z-index](#a-quick-aside-on-z-index)
 - [The float property](#the-float-property)
@@ -40,8 +38,10 @@ The CSS Sections Are Pulled From The Learning Lab Crash Course!
 - [Branches](#branches)
   - [The Main Branch](#the-main-branch)
   - [Working on New Branches](#working-on-new-branches)
-- [Merging and Merge Conflicts](#merging-and-merge-conflicts) -[Linting, Github Actions](#linting-github-actions)
-- [Pull Requests & Code Review](#pull-requests-code-reiew)
+- [Merging](#merging)
+  - [Merge Conflicts](#merge-conflicts) 
+  -[Linting and Github Actions](#linting-and-github-actions)
+- [Pull Requests And Code Review](#pull-requests-and-code-review)
 
 ## CSS Box Model
 
@@ -58,7 +58,7 @@ To see it in action, we can just run inspect element on whatever we want!
 
 Let's go over all of them in action:
 
-### Content
+### The Content Area
 
 The content area contains, well, your content. By default, the size of this area is determined by the size of your content: a `400px` image will have a content area of size `400px`, and text _generally_ fills as much space as possible (though we'll go into this more in a bit). In addition, we've played around with the `width` and `height` attributes: by default, the `width` and `height` attributes only affect the content area.
 
