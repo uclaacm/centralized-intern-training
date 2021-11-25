@@ -39,8 +39,8 @@ The CSS Sections Are Pulled From The Learning Lab Crash Course!
   - [The Main Branch](#the-main-branch)
   - [Working on New Branches](#working-on-new-branches)
 - [Merging](#merging)
-  - [Merge Conflicts](#merge-conflicts) 
-  -[Linting and Github Actions](#linting-and-github-actions)
+  - [Merge Conflicts](#merge-conflicts)
+  - [Linting and Github Actions](#linting-and-github-actions)
 - [Pull Requests And Code Review](#pull-requests-and-code-review)
 
 ## CSS Box Model
