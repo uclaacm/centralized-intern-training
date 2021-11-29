@@ -8,3 +8,4 @@ Here is a collection of each session's lesson plan for reference in the future!
 ## Table of Contents
 
 - [Intro to HTML, CSS, and Github](https://github.com/uclaacm/centralized-intern-training/tree/main/01_html_css_github)
+- [Intermediate CSS and Github Collaboration](https://github.com/uclaacm/centralized-intern-training/tree/main/02_intermediate_css_github_workflows)
