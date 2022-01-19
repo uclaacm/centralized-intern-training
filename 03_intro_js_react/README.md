@@ -39,13 +39,13 @@ Today, we'll go into an introduction to Javascript as a programming language, an
   - [`map`](#map)
   - [`reduce`](#reduce)
 - [Using `map` in React](#using-map-in-react)
-    - [List and Keys](#list-and-keys)
+  - [List and Keys](#list-and-keys)
 - [Functional React](#functional-react)
-    - [State](#state)
-    - [Props](#props)
-    - [Props Vs State](#props-vs-state)
-    - [Outdated: Class Based React](#outdated-class-based-react)
-    - [Why Functional](#why-functional)
+  - [State](#state)
+  - [Props](#props)
+  - [Props Vs State](#props-vs-state)
+  - [Outdated: Class Based React](#outdated-class-based-react)
+  - [Why Functional](#why-functional)
 - [Manipulating the DOM in React](#manipulating-the-dom-in-React)
 - [Conclusion](#conclusion)
 - [References](#references)
@@ -161,8 +161,8 @@ So far, we've discussed using the `let` keyword to define variables. `let` is bl
 
 ```js
 let error = true;
-if (error){
-    let errorMessage = "oh no!";
+if (error) {
+  let errorMessage = "oh no!";
 }
 console.log(errorMessage);
 // undefined
@@ -174,8 +174,8 @@ There is another keyword, `var` - in fact, this is the original one. `var` is fu
 
 ```js
 let error = true;
-if (error){
-    var errorMessage = "oh no!";
+if (error) {
+  var errorMessage = "oh no!";
 }
 console.log(errorMessage);
 // "oh no!"
@@ -201,8 +201,7 @@ CONSTANT_OBJECT = {};
 
 Okay, well that first example makes sense. But what's up with the second one? Well, recall that all data types in Javascript are objects, and therefore all variables are references.
 
-So, what `const` really guarantees is that the reference will always stay the same. With primitive data types, that's great: because they're immutable, once the value is created, it'll never change. But, for every non-primitive data type, the object *is mutable*, and so it can change at any point without changing the underlying reference. Long story short? Using `const` on an object, or an array, or many other data types doesn't guarantee that it's truly constant - it just can't be reassigned.
-
+So, what `const` really guarantees is that the reference will always stay the same. With primitive data types, that's great: because they're immutable, once the value is created, it'll never change. But, for every non-primitive data type, the object _is mutable_, and so it can change at any point without changing the underlying reference. Long story short? Using `const` on an object, or an array, or many other data types doesn't guarantee that it's truly constant - it just can't be reassigned.
 
 ## Primitive Types
 
@@ -252,7 +251,6 @@ After we change myNum's value to 50, it becomes
 | -------- | ----- |
 | myNum    | 50    |
 | numRef   | 56    |
-
 
 ## Type Coercion
 
@@ -321,6 +319,7 @@ The main difference between primitives and objects is how they are stored in mem
 An example of an object is an array, let's see how an array is stored in memory:
 
 ### Arrays And References in JavaScript
+
 ```js
 const arr = [1, 2, 3];
 const arrRef = arr;
@@ -721,21 +720,21 @@ This can be a **serious problem** since application crashes can be very costly f
 Okay, but how does this help us make websites? Well, the original focus was to change the "Document Object Model", which as you may recall, is a fancy word for our webpage. Let's run through a bare-bones example:
 
 ```html
-<div> You have <span id="likes-counter">0</span> upvotes.  </div>
-<button id="incrementer">Upvote! </button>
-<button id="decrementer">Downvote! </button>
+<div>You have <span id="likes-counter">0</span> upvotes.</div>
+<button id="incrementer">Upvote!</button>
+<button id="decrementer">Downvote!</button>
 ```
 
 ```js
 let likeCounterElement = document.getElementById("likes-counter");
-const buttonIncrementer = document.getElementById("incrementer")
-buttonIncrementer.addEventListener("click", function() {
-    const currentLikes = Number(likeCounterElement.innerHTML);
-    likeCounterElement.innerHTML= currentLikes+1;
+const buttonIncrementer = document.getElementById("incrementer");
+buttonIncrementer.addEventListener("click", function () {
+  const currentLikes = Number(likeCounterElement.innerHTML);
+  likeCounterElement.innerHTML = currentLikes + 1;
 });
-document.getElementById("decrementer").addEventListener("click", ()=>{
-    const currentLikes = Number(likeCounterElement.innerHTML);
-    likeCounterElement.innerHTML= currentLikes-1;
+document.getElementById("decrementer").addEventListener("click", () => {
+  const currentLikes = Number(likeCounterElement.innerHTML);
+  likeCounterElement.innerHTML = currentLikes - 1;
 });
 ```
 
@@ -774,10 +773,11 @@ We declare a variable to be the element on our page with ID "likes-counter", cas
 ## What's React?
 
 React is **a library for building user interfaces. It is declarative, component-based, and "learn once, write anywhere"**. Here's what all those terms mean:
-* **declarative**: your code is free to *describe* what it does, rather than implement every little detail. Think of it as the difference between writing HTML and writing C++.
-* **component-based**: your interface will be compartmentalized into discrete components.
-  * This makes life easier for us down the line, since our code will be far more maintainable. Imagine if Facebook kept all it's interface code in a single HTML file!
-* **"learn once, write anywhere"**: your code will work regardless the other technologies you use. Additional features are painless.
+
+- **declarative**: your code is free to _describe_ what it does, rather than implement every little detail. Think of it as the difference between writing HTML and writing C++.
+- **component-based**: your interface will be compartmentalized into discrete components.
+  - This makes life easier for us down the line, since our code will be far more maintainable. Imagine if Facebook kept all it's interface code in a single HTML file!
+- **"learn once, write anywhere"**: your code will work regardless the other technologies you use. Additional features are painless.
 
 ### But why is it so popular?
 
@@ -798,17 +798,19 @@ npx create-react-app <folderName>
 ```
 
 Once this runs, you'll create a new package with all the dependencies for a react app already installed, and a handful of scripts to run, test, and build your app at your disposal. More specifically,
-* We can install our dependencies with `yarn install`
-  * When you install, you'll see a `yarn.lock` file appear. This contains all the exact dependencies that we need. Don't forget to commit this to Github! (The npm equivalent is called `package-lock.json` and if you ever use npm, don't forget to commit it). You don't have to commit `node_modules` though, since it's just all the dependencies that you specified in the `yarn.lock` file and is downloaded to your computer.
-* We can serve the project locally with `yarn start`
-* We can build the project for production with `yarn build`
-* We can run any tests we have written with `yarn test`
+
+- We can install our dependencies with `yarn install`
+  - When you install, you'll see a `yarn.lock` file appear. This contains all the exact dependencies that we need. Don't forget to commit this to Github! (The npm equivalent is called `package-lock.json` and if you ever use npm, don't forget to commit it). You don't have to commit `node_modules` though, since it's just all the dependencies that you specified in the `yarn.lock` file and is downloaded to your computer.
+- We can serve the project locally with `yarn start`
+- We can build the project for production with `yarn build`
+- We can run any tests we have written with `yarn test`
 
 The equivalents using `npm` are:
-* We can install our dependencies with `npm install`
-* We can serve the project locally with `npm start`
-* We can build the project for production with `npm build`
-* We can run any tests we have written with `npm test`
+
+- We can install our dependencies with `npm install`
+- We can serve the project locally with `npm start`
+- We can build the project for production with `npm build`
+- We can run any tests we have written with `npm test`
 
 You can take a look at (and edit!) the package.json dependencies, scripts, and linters!
 
@@ -827,9 +829,9 @@ Well, judging by the fact that the webpage tells us to "Edit src/App.js and save
 Navigate in your package folder to [src/App.js](src/App.js). Once in, we can see what it is that React wants us to edit:
 
 ```js
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
 function App() {
   return (
@@ -856,12 +858,13 @@ export default App;
 ```
 
 Pretty short and sweet! If we change something in the file, we can see that the webpage on our browser will automatically reflect our changes. So what does this demo tell us?
-* We can return HTML as easily as anything else.
-* We can import CSS files and others - not just JS - to our code.
-  * Notice we import `./App.css`, and its styles are applied to the component.
-  * Notice how we import `logo.svg` as `logo` and then use it later as a value: `src={logo}`.
-* Some of our HTML properties exist under a different name.
-  * `class` becomes `className`, for example.
+
+- We can return HTML as easily as anything else.
+- We can import CSS files and others - not just JS - to our code.
+  - Notice we import `./App.css`, and its styles are applied to the component.
+  - Notice how we import `logo.svg` as `logo` and then use it later as a value: `src={logo}`.
+- Some of our HTML properties exist under a different name.
+  - `class` becomes `className`, for example.
 
 ## HTML in JS: JSX
 
@@ -908,7 +911,7 @@ Certainly unconventional, but it works. This takes our constant `greeting` and a
 A common pattern you'll see in JSX is use of ternary:
 
 ```js
-<h1>{greeting ? greeting : 'hello'}</h1>
+<h1>{greeting ? greeting : "hello"}</h1>
 ```
 
 If the value `greeting` is truthy, then it will be returned. Otherwise, 'hello' is returned. This is handy for dealing with values we might not be sure exist.
@@ -916,8 +919,9 @@ If the value `greeting` is truthy, then it will be returned. Otherwise, 'hello' 
 #### Things that were renamed
 
 There are a few properties from HTML that have been renamed in React's JSX. That is, there are a few **DOM elements** that have been renamed. Here are example changes from what we've learned for reference:
-* `class` -> `className`
-* `onchange` -> `onChange`
+
+- `class` -> `className`
+- `onchange` -> `onChange`
 
 Notice the trend? **DOM element names have just been made camel-cased**. That's all there is to it! A more complete list (including how inline styling has changed), can be found [here](https://reactjs.org/docs/dom-elements.html).
 
@@ -936,51 +940,72 @@ The extension for javasript files, whether or not it has "Javascript Expressions
 `forEach`, `map`, `reduce`
 
 [Take a look here for more](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
+
 ```jsx
 const cats = ["pickles", "oscar", "mittens", "meow meow"];
 ```
 
 ### `forEach`
+
 To iterate on each value, we can use `forEach`
+
 ```jsx
-cats.forEach((cat)=> console.log(cat + " says 'meow i want food' :("))
+cats.forEach((cat) => console.log(cat + " says 'meow i want food' :("));
 ```
+
 ### `map`
+
 To iterate on each value, and return the results (in an array), we can use `map`
+
 ```jsx
-cats.map((cat)=> <>{cat} wants food >:0</>)
+cats.map((cat) => <>{cat} wants food >:0</>);
 ```
+
 ### `reduce`
+
 To accumulate on each value, then return the accumulated result, we can use `reudce`
+
 ```jsx
-cats.reduce((cat) => cat + " ")
+cats.reduce((cat) => cat + " ");
 ```
+
 ### Other functional commands
+
 There are other things like `find`, `filter`, and others, but you can just try it out as need be! Generally those definitions above are more often used.
 
 ## Using `map` in React
+
 ```jsx
-{cats.map((cat)=> <div style={{backgroundColor: "blue"}}>{cat} wants food :0</div>)}
+{
+  cats.map((cat) => (
+    <div style={{ backgroundColor: "blue" }}>{cat} wants food :0</div>
+  ));
+}
 ```
-### Lists and Keys 
+
+### Lists and Keys
+
 Doing the above causes
 `Warning: Each child in a list should have a unique "key" prop.`
 
 This means that every item, every `div` needs to have a key.
-This is because react renders this list by checking out whats different right, and it uses key to help determine whether to render a completely new object, or just modify it. 
+This is because react renders this list by checking out whats different right, and it uses key to help determine whether to render a completely new object, or just modify it.
 If you want to learn more about how React reconcilitates things, take a look (here)[https://reactjs.org/docs/reconciliation.html]
+
 ```
 {cats.map((cat)=> <div key={cat}>{cat} wants food :0</div>)}
 ```
- 
+
 ## Functional React
 
-### State 
+### State
+
 `useState` is basically the same as setting state.
 
 Remember to break up state with `[name, setName]`
 
 Use `setName` to setup the new state so that React knows to rerender!
+
 ```jsx
 function App() {
   const [number, setNumber] = useState(0);
@@ -988,7 +1013,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         {number}
-        <button onClick={()=>setNumber(number+1)}/>
+        <button onClick={() => setNumber(number + 1)} />
       </header>
     </div>
   );
@@ -996,23 +1021,26 @@ function App() {
 ```
 
 ### Props
+
 This is the original input passed into a function
+
 - Imagine this as the things you put into a constructor
+
 ```jsx
 function Cats(props) {
   return <div>{props.name}</div>;
 }
 function App() {
-const cats = ["pickles", "oscar", "mittens", "meow meow"];
+  const cats = ["pickles", "oscar", "mittens", "meow meow"];
 
   const [number, setNumber] = useState(0);
   return (
     <div className="App">
       <header className="App-header">
-        {
-          cats.map((cat)=> <Cats name={cat}/>)
-        }
-        <button onClick={()=>setNumber(number+1)}/>
+        {cats.map((cat) => (
+          <Cats name={cat} />
+        ))}
+        <button onClick={() => setNumber(number + 1)} />
       </header>
     </div>
   );
@@ -1020,20 +1048,24 @@ const cats = ["pickles", "oscar", "mittens", "meow meow"];
 ```
 
 ### Props vs State
+
 Imagine Props as the constructor variables in C++, and the state as the member variables! **You cannot modify state directly, you have to use `setState` in order to set the state.** This is because React only knows to rerender (the parts of) your component based on when which states have changed from `setState`.
 
 Let’s combine these topics so that every time you press a button, the number of cats you own increases!
 Let’s bring the button and number logic into the Cats function
+
 ```jsx
 function Cats(props) {
   const [number, setNumber] = useState(0);
-  return <div>
-    {props.name}
-    <br/>
-    {number}
-    <br/>
-    <button onClick={()=>setNumber(number+1)}>Like</button>
-  </div>;
+  return (
+    <div>
+      {props.name}
+      <br />
+      {number}
+      <br />
+      <button onClick={() => setNumber(number + 1)}>Like</button>
+    </div>
+  );
 }
 function App() {
   const cats = ["pickles", "oscar", "mittens", "meow meow"];
@@ -1041,28 +1073,31 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {
-          cats.map((cat) => <Cats name={cat}/>)
-        }
+        {cats.map((cat) => (
+          <Cats name={cat} />
+        ))}
       </header>
     </div>
   );
 }
 ```
+
 Now, let’s try to pass in the starting number!
 
-
 Let’s add in the value from the map!
+
 ```jsx
 function Cats(props) {
   const [number, setNumber] = useState(props.startingPoint);
-  return <div>
-    {props.name}
-    <br/>
-    {number}
-    <br/>
-    <button onClick={()=>setNumber(number+1)}>Like</button>
-  </div>;
+  return (
+    <div>
+      {props.name}
+      <br />
+      {number}
+      <br />
+      <button onClick={() => setNumber(number + 1)}>Like</button>
+    </div>
+  );
 }
 function App() {
   const cats = ["pickles", "oscar", "mittens", "meow meow"];
@@ -1070,9 +1105,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {
-          cats.map((cat) => <Cats name={cat} startingPoint={4}/>)
-        }
+        {cats.map((cat) => (
+          <Cats name={cat} startingPoint={4} />
+        ))}
       </header>
     </div>
   );
@@ -1080,7 +1115,9 @@ function App() {
 ```
 
 ### Outdated: Class Based React
+
 This is getting phased out. This is just for reference!
+
 ```jsx
 class ComponentName extends React.Component {
   render() {
@@ -1090,26 +1127,30 @@ class ComponentName extends React.Component {
 ```
 
 ### State and Props
+
 See here for more details: https://reactjs.org/docs/state-and-lifecycle.html
+
 ```jsx
 class ComponentName extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {date: new Date()}
+    this.state = { date: new Date() };
   }
   tick() {
     this.setState({
-      date: new Date()
-    })
+      date: new Date(),
+    });
   }
   render() {
     return <div>HI I AM COMPONENT {this.state.date.toLocaleTimeString()}</div>;
   }
 }
 ```
+
 `componentDidMount`, `componentWillUnmount` => things happen when the Component starts up and when it is deleted
 
 ## Why Functional
+
 - Lightweight
 - Easier to read
 - Nice hooks (like the `useState` stuff)
@@ -1121,16 +1162,15 @@ class ComponentName extends React.Component {
 Now, let's make the same upvote counter we made in js using React. Here's a bare-bones example.
 
 ```jsx
-import React, { useState } from 'react';
-
+import React, { useState } from "react";
 
 function App() {
   const [counter, setCounter] = useState(0);
   return (
     <div>
-        <div> You have {counter} upvotes.  </div>
-        <button onClick={() => setCounter(counter+1)}>Upvote! </button>
-        <button onClick={() => setCounter(counter-1)}>Downvote! </button>
+      <div> You have {counter} upvotes. </div>
+      <button onClick={() => setCounter(counter + 1)}>Upvote! </button>
+      <button onClick={() => setCounter(counter - 1)}>Downvote! </button>
     </div>
   );
 }
@@ -1148,4 +1188,3 @@ And that's it for today! We've learned the basics of Javascript and React, and h
 - [TeachLA Learning Labs Crash Course](https://github.com/uclaacm/learning-lab-crash-course-su20/tree/main/03-intro-js)
 - [TeachLA Intro To React](https://github.com/uclaacm/teach-la-dev-training/tree/main/intro-to-react)
 - [TeachLA Learning Labs Crash Course](https://github.com/uclaacm/learning-lab-crash-course-su20/tree/main/07-intro-react)
- 
