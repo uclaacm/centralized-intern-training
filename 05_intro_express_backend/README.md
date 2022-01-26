@@ -144,11 +144,11 @@ app.get("/query", (req, res) => {
 
 Form data is generally used for POST and UPDATE requests, where a lot of data is expected. Form data is stored in the body.
 
-### How do I make an endpoint with a handler?
+### How do I get data from an endpoint?
 
 The following code shows how to get data from an api endpoint in node. You should not that using the fetch function directly in a Javascript file requires you to install `node-fetch` and import `fetch` from `node-fetch`. You will not need to do this if you are working directly in a react app.
 
-```
+```js
 import fetch from "node-fetch"
 
 const url = 'http://localhost:8081/json'
