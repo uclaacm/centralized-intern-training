@@ -17,6 +17,12 @@ app.get('/query', (req, res) => {
 	res.status(200).send(`You input param1 to be $(param1) and param2 to be $(param2)`)
 })
 
+app.get('/json', (req, res) => {
+	res.status(200).send({
+		'test': 'test data'
+	})
+})
+
 app.use('/birds', birds)
 
 app.use((req, res) => {

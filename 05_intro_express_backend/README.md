@@ -15,6 +15,7 @@ Today we will learn the basics of how to write a backend server in Javascript us
 - [Databases](#databases)
   - [SQL Databases](#sql-databases)
   - [SQL Query](#sql-query)
+  - [NoSQL Databases](#nosql-databases)
 - [Middleware](#middleware)
   - [Express Router](#express-router)
   - [More middleware examples](#more-middleware-examples)
@@ -83,17 +84,17 @@ Typically in any framework, you would need to first specify the handler, and the
 Specifying a handler requires you to define a function that performs the action. Suppose that we want to have an endpoint that returns hello at the URl `/hello`. In express, the code to create this endpoint would look something like this:
 
 ```js
-const express = require('express')
-const app = express()
-const port = 8081
+const express = require("express");
+const app = express();
+const port = 8081;
 
-app.get('/hello', (req, res) => {
-	res.status(200).send('Hello!')
-})
+app.get("/hello", (req, res) => {
+  res.status(200).send("Hello!");
+});
 
 app.listen(port, () => {
-	console.log(`Example app listening on port ${port}`)
-})
+  console.log(`Example app listening on port ${port}`);
+});
 ```
 
 Here, the function `app.get()` is supplied the url for the endpoint we want and the handler function for the endpoint. If you were to run this on your computer by running the command `node app.js` (replace `app.js` with the name of your file) and go to your browser and try to access `localhost:8081/hello`, you would see the text "Hello".
@@ -102,8 +103,8 @@ The handler function takes in the request and response objects as its argument, 
 
 ```js
 app.use((req, res) => {
-	res.status(404).send("Endpoint does not exist")
-})
+  res.status(404).send("Endpoint does not exist");
+});
 ```
 
 And that's it! That's endpoints and handlers at their bare bones.
@@ -131,11 +132,13 @@ Query parameters are when you have ? after an endpoint URL followed by the patte
 An example endpoint that uses query parameters is shown below:
 
 ```js
-app.get('/query', (req, res) => {
-	let param1 = req.query.param1;
-	let param2 = req.query.param2;
-	res.status(200).send(`You input param1 to be ${param1} and param2 to be ${param2}`)
-})
+app.get("/query", (req, res) => {
+  let param1 = req.query.param1;
+  let param2 = req.query.param2;
+  res
+    .status(200)
+    .send(`You input param1 to be ${param1} and param2 to be ${param2}`);
+});
 ```
 
 Form data is generally used for POST and UPDATE requests, where a lot of data is expected. Form data is stored in the body.
@@ -171,7 +174,8 @@ WHERE quantity < 5;
 
 You can learn more about SQL queries [here](https://www.w3schools.com/sql/).
 
-###NoSQL Databases
+### NoSQL Databases
+
 NoSQL databases are structured into documents. Each document is similar to a JSON object, where you have a set of fields and values. A document can have missing fields, but each document in a collection must have the specified value type for a particular field.
 
 The values could be of different types like integer, string, dates, etc. They can also be maps!. As such, NoSQL allow for much more flexibility.
@@ -221,22 +225,22 @@ It is good software practice to compartmentalize your code and to avoid code was
 Express provides a Router class that allows us to create modular route handlers. A Router instance serves as an example of middleware. The best way to demonstrate a router is with an example. We first create a new file called `birds.js` with the following content.
 
 ```js
-const express = require('express')
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
-router.get('/', (req, res) => {
-	res.status(200).send('Birds homepage')
-})
+router.get("/", (req, res) => {
+  res.status(200).send("Birds homepage");
+});
 
-router.get('/about', (req, res) => {
-	res.status(200).send('About birds')
-})
+router.get("/about", (req, res) => {
+  res.status(200).send("About birds");
+});
 
 router.use((req, res) => {
-	res.status(404).send("No birds were found here!")
-})
+  res.status(404).send("No birds were found here!");
+});
 
-module.exports = router
+module.exports = router;
 ```
 
 This code sets up a router as a module and defines some routes. We now need to mount the router module on a path in the main app. To do this we go back to the entry point of our express app and add the following code.
@@ -257,9 +261,9 @@ We will now demonstrate middleware that runs at the beginning of every API call.
 
 ```js
 server.use((req, res, next) => {
-	// Things to be done for all requests
-	next()
-})
+  // Things to be done for all requests
+  next();
+});
 ```
 
 It is important to note a few things here. First, middleware should be defined before the endpoints you want it to be used for. Secondly, the function passed into this endpoint takes in a function `next` as a parameter. The function `next` is a function in Express router which executes the middleware succeeding the current middleware. In our case, it would move on the API endpoint the request for intended for. Thirdly, We observer a similar call to `app.use()` for when we want to indicate the user has tried to reach and endpoint does not exist. Here, the relative position of the call to `server.use()` makes a difference, since our middleware being before the other endpoints means it will be called before them, while the code that returns a 404 error happens after all the code and there will only be run if none of them are reached of fail to return a response. You can check and see that you receive a 404 error in the case where you replace returning a response with a call to `next()`.
