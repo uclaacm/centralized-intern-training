@@ -12,8 +12,13 @@ async function fetchData(url) {
 	const response = await fetch(url, {
 		'Content-Type': 'application/json'
 	})
+	console.log(response.status)
 	const data = await response.json()
 	return data
 }
 
-console.log("from function", await fetchData(url))
+const data = await fetchData(url)
+
+fetch('http://localhost:8081/hello')
+	.then(response => response.text())
+	.then(text => console.log(text))

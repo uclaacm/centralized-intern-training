@@ -12,6 +12,7 @@ Today we will learn the basics of how to write a backend server in Javascript us
   - [What is a body?](#what-is-a-body)
   - [What is a handler?](#what-is-a-handler)
   - [How do I make an endpoint with a handler?](#so-how-do-i-make-an-endpoint-with-a-handler)
+  - [How do I get data from an endpoint?](#how-do-i-get-data-from-an-endpoint)
 - [Databases](#databases)
   - [SQL Databases](#sql-databases)
   - [SQL Query](#sql-query)
@@ -142,6 +143,34 @@ app.get("/query", (req, res) => {
 ```
 
 Form data is generally used for POST and UPDATE requests, where a lot of data is expected. Form data is stored in the body.
+
+### How do I make an endpoint with a handler?
+
+The following code shows how to get data from an api endpoint in node. You should not that using the fetch function directly in a Javascript file requires you to install `node-fetch` and import `fetch` from `node-fetch`. You will not need to do this if you are working directly in a react app.
+
+```
+import fetch from "node-fetch"
+
+const url = 'http://localhost:8081/json'
+
+fetch(url, {
+	'Content-Type': 'application/json'
+})
+	.then(response => response.json())
+	.then(data => console.log(data))
+
+async function fetchData(url) {
+	const response = await fetch(url, {
+		'Content-Type': 'application/json'
+	})
+	const data = await response.json()
+	return data
+}
+
+const data = await fetchData(url)
+```
+
+The `fetch` function used above takes in the URL of an API endpoint and request headers as arguments. In the above example, the `Content-Type` request header has been set. There are two examples of data fetching. One of them uses promise chaining and the other uses async await. Both methods produce equivalent results. The fetch call returns a response object which can be destructured to get the `json` returned and the status.
 
 ## Databases
 
