@@ -1,8 +1,30 @@
 # Introduction to Backend
 
+Today we will learn the basics of how to write a backend server in Javascript using the Express framework, including learning why you need a backend in the first place and how it works!
+
+## Table of Contents
+
+- [Overview](#high-level-overview-of-backends)
+  - [Why Backend?](#why-do-we-need-backends)
+  - [What do Backends do?](#what-do-backends-do-exactly)
+- [Endpoints and Handlers](#endpoints-and-handlers)
+  - [What are endpoints](#what-are-endpoints)
+  - [What is a "body"?](#what-is-a-body)
+  - [What is a handler?](#what-is-a-handler)
+  - [How do I make an endpoint with a handler?]("how-do-i-make-an-endpoint-with-a-handler)
+- [Databases](#databases)
+  - [SQL Databases](#sql-databases)
+  - [SQL Query](#sql-query)
+- [Middleware](#middleware)
+  - [Express Router](#express-router)
+  - [More middleware examples](#more-middleware-examples)
+- [Authentication](#authentication)
+  - [DIY](#diy)
+  - [SSO](#sso)
+
 ## High Level Overview Of Backends
 
-Hi everybody! This course is about backend development. This course does not require frontend experience, though having frontend experience will help you better understand some of the things we define in this workshop. In this course, we will learn the basics of how to write a backend server in Javascript using the Express framework.
+Today's workshop is about backend development. You don't need frontend experience, though having frontend experience will help you better understand some of the things we define in this workshop.
 
 ### Why Do We Need Backends?
 
@@ -39,7 +61,7 @@ Secondly, the URL is the address at which you would like the clients to request 
 
 For example, `GET /users` could be an endpoint that responds with a list of users, and `POST /users/create` would create a new record of a user with the information included in the body of the request.
 
-### What is a "body"?
+### What is a body?
 
 In a HTTP request, there is a method, a URL, headers, and a body. The method and the URL together specify which endpoint the request is for. The headers specify information about the request, such as information about cookies. THe body is where data is placed to pass to an endpoint. It is particularly used for `POST` and `UPDATE requests that usually require form data.
 
