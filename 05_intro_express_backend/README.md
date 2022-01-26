@@ -9,9 +9,9 @@ Today we will learn the basics of how to write a backend server in Javascript us
   - [What do Backends do?](#what-do-backends-do-exactly)
 - [Endpoints and Handlers](#endpoints-and-handlers)
   - [What are endpoints](#what-are-endpoints)
-  - [What is a "body"?](#what-is-a-body)
+  - [What is a body?](#what-is-a-body)
   - [What is a handler?](#what-is-a-handler)
-  - [How do I make an endpoint with a handler?]("how-do-i-make-an-endpoint-with-a-handler)
+  - [How do I make an endpoint with a handler?](#so-how-do-i-make-an-endpoint-with-a-handler)
 - [Databases](#databases)
   - [SQL Databases](#sql-databases)
   - [SQL Query](#sql-query)
@@ -21,6 +21,8 @@ Today we will learn the basics of how to write a backend server in Javascript us
 - [Authentication](#authentication)
   - [DIY](#diy)
   - [SSO](#sso)
+- [Conclusion](#conclusion)
+- [References](#references)
 
 ## High Level Overview Of Backends
 
@@ -80,7 +82,7 @@ Typically in any framework, you would need to first specify the handler, and the
 
 Specifying a handler requires you to define a function that performs the action. Suppose that we want to have an endpoint that returns hello at the URl `/hello`. In express, the code to create this endpoint would look something like this:
 
-```
+```js
 const express = require('express')
 const app = express()
 const port = 8081
@@ -98,7 +100,7 @@ Here, the function `app.get()` is supplied the url for the endpoint we want and 
 
 The handler function takes in the request and response objects as its argument, and returns a status code 200 and the string "Hello!". The response code 200 means there is no error. There are other error codes that can mean other things. In fact, lets create an endpoint that it reached whenever there is an invalid URL. In this case we want to return the status code 404, which you might remember being the error code for not found.
 
-```
+```js
 app.use((req, res) => {
 	res.status(404).send("Endpoint does not exist")
 })
@@ -114,7 +116,7 @@ For instance, we can have the endpoint `GET /users/:id`. The colon specifies tha
 
 To see how the request parameters are stored and can be accessed in the handler function, we access the params property of the request object as shown below:
 
-```
+```js
 app.get('/users/:id', (req, res) => {
 	res.status(200).send(req.params)
 }
@@ -128,7 +130,7 @@ Query parameters are when you have ? after an endpoint URL followed by the patte
 
 An example endpoint that uses query parameters is shown below:
 
-```
+```js
 app.get('/query', (req, res) => {
 	let param1 = req.query.param1;
 	let param2 = req.query.param2;
@@ -155,14 +157,14 @@ To retrieve, add, modify, or delete information from SQL databases, you perform 
 
 Here's an example of a basic query retrieving some data from our table above.
 
-```
+```sql
 SELECT * FROM fruits
 WHERE quantity < 5;
 ```
 
 This query asks for all entries in the `fruits` table where the `quantity` field is less than 5. It asks for all the columns that these rows have. To query for only certain columns of the rows:
 
-```
+```sql
 SELECT name, price FROM fruits
 WHERE quantity < 5;
 ```
@@ -175,7 +177,7 @@ NoSQL databases are structured into documents. Each document is similar to a JSO
 The values could be of different types like integer, string, dates, etc. They can also be maps!. As such, NoSQL allow for much more flexibility.
 For the same data that is in the table above, we can store them in NoSQL as such:
 
-```
+```json
 {
     "id": 1,
     "name": "apple",
@@ -218,7 +220,7 @@ It is good software practice to compartmentalize your code and to avoid code was
 
 Express provides a Router class that allows us to create modular route handlers. A Router instance serves as an example of middleware. The best way to demonstrate a router is with an example. We first create a new file called `birds.js` with the following content.
 
-```
+```js
 const express = require('express')
 const router = express.Router()
 
@@ -239,7 +241,7 @@ module.exports = router
 
 This code sets up a router as a module and defines some routes. We now need to mount the router module on a path in the main app. To do this we go back to the entry point of our express app and add the following code.
 
-```
+```js
 var birds = require('./birds)
 
 // ...
@@ -253,7 +255,7 @@ Our app is now able to handle requests to `/birds` and `/birds/about` and list o
 
 We will now demonstrate middleware that runs at the beginning of every API call. Before the definition of other endpoints in our main express file, we can define a function that runs before any of the other handler functions. To do this, we add a call to `server.use` without specifying a route. An example of this is shown below.
 
-```
+```js
 server.use((req, res, next) => {
 	// Things to be done for all requests
 	next()
@@ -283,3 +285,14 @@ These days, you often see "Sign in with \_\_" on websites. THese sites use Singl
 To achieve this, the general approach is to evoke the appropriate API call from the 3rd party on the frontend to trigger the Sign in pop up from the 3rd party. The 3rd party will then return a token and a profile ID. The profile ID is the assigned ID to the user account by the 3rd party. The token is a string that marks if the user is signed in. It's not exactly the same thing as a session, but it is similar.
 
 On the backend, whenever a user should be signed in, you'd check using the token and the 3rd party's API to see if the user is signed in. You can associate the profile ID givenw itht he data you want to store, as usual. SSO makes implementing authentication a lot easier since you don't have to deal with sessions or storing passwords.
+
+## Conclusion
+
+Today we learned the basic principles of backend, and how to use express to build middleware and routing!
+
+This is the last workshop in our training for this year, and committees will have more specific training should you need any. We hope you had fun and learned some cool web dev!
+
+## References
+
+- [TeachLA Intro to Backend](https://github.com/uclaacm/teach-la-dev-training/tree/main/backend)
+- [Express JS Documentation](https://expressjs.com/en/guide/routing.html)
