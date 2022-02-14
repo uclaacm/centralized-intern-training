@@ -6,7 +6,7 @@ Welcome to an introduction to accessibility on the web! After this workshop, you
 
 - [Why Accessibility?](#why-accessibility)
 - [Appearance](#appearance)
-    - [Font Size](#font-size)
+    - [Fonts and Font Size](#fonts-and-font-size)
     - [Line Height](#line-height)
     - [Zoom Levels](#zoom-levels)
     - [Color Contrast](#color-contrast)
@@ -57,7 +57,7 @@ Good web design, like any kind of design, is a balance of both aesthetic and fun
 
 Let's start with the visual appearance of websites, since most of us are probably already familiar with the qualities that make a website visually accessible or inaccessible.
 
-### Font Size
+### Fonts and Font Size
 
 Have you ever visited a website with an uncomfortably small or weirdly large font? Pretty annoying, right? Fortunately, someone was smart enough to come up with standard font sizes for mobile and desktop. 
 
@@ -167,6 +167,39 @@ The WCAG documents explain how to make web content more accessible to people wit
 
 ### Alt Text
 
+You've seen alt text before, which is displayed when an image file fails to load. It's also read by screenreaders.
+
+Always provide alt text for images that have semantic meaning. For example: a decorative background image of a stripe pattern probably does not need alt text, but an illustrative image of the company's logo probably does.
+
+A good rule of thumb is if the image adds context to the page that isn't already present in surrounding text, then alt text is needed. If nothing new is added, then `alt=""` is okay.
+
+Why can't we just omit the `alt` attribute? In the absence of alt text, screenreaders may attempt to read the file name instead.
+
+```html
+<!-- HTML file -->
+ <img href="images/acm-logo.png" alt="ACM logo" />
+```
+
+![ACM logo](images/acm-logo.png)
+
+Writing good alt text takes a little thought. Think of it as similar to a caption, only as brief as possible. For example, do not write "Image of..." or "Graphic of..." since it's usually obvious what the element is. However, "Painting of..." may be used since the user would not know this if the image had failed to load. Alt text is meant to describe functionality of the image, not just the visual result of looking at it.
+
+Be accurate when describing image content&mdash;we shouldn't provide information that is not present in the media.
+
+Alt text for icons follows the same conventions as for images, since some icons (such as file-type icons) add context.
+
+The only situation where alt text can be redundant with surrounding text is when an image functions as a link. In that case, alt text must be present to act as a link, so `alt=""` is not allowed.
+
+Videos do not support `alt` attributes. Use `title` instead or provide an external link to the video.
+
+Finally, **CSS does not support alt text**. When using `background-image` and other CSS image-related properties, use decorative images only, since there's no way a screenreader can "see" the image.
+
+In summary, when writing alt text, we should ask ourselves:
+
+1. Does this image/icon add context (or does it function as a link)?
+2. Is my alt text as brief as possible?
+3. Does my alt text accurately and fully describe the image and the purpose of having the image on the webpage?
+
 ### Transcripts
 
 English language learners and people with hearing impairments can have difficulty following audio or video elements. Transcripts and subtitles are also useful in noisy environments or when skipping through media to find specific information.
@@ -207,12 +240,16 @@ Similarly, allow users to pause and navigate slideshows—it can be distracting 
 Many people are prone to seizures and can be harmed by websites with too much animation. This means limiting the number of GIFs, and avoiding flashing elements at all costs (the WCAG 2.1 standard is three flashes or less per second).
 
 ## Focus Control
+
 ### Keyboard Accessibility
+
 ### Tabbing
 
 ## Other Things
 
 ### Simplicity
+
+Simplicity is an important factor for web accessibility. Making sure language is general so everyone understands what you're saying, using direct links instead of unnecessary icons, and so on. As we said in the introduction - good web design, like any kind of design, is a balance of both aesthetic and function. While we do want our websites to look pretty and cool, it's important to avoid overwhelming our users with information or fancy representations of things that could've been simpler and easier to process.
 
 ### Setting Language
 
