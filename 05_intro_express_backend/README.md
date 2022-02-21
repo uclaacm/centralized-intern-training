@@ -323,8 +323,6 @@ On the backend, whenever a user should be signed in, you'd check using the token
 
 Today we learned the basic principles of backend, and how to use express to build middleware and routing!
 
-This is the last workshop in our training for this year, and committees will have more specific training should you need any. We hope you had fun and learned some cool web dev!
-
 ## References
 
 - [TeachLA Intro to Backend](https://github.com/uclaacm/teach-la-dev-training/tree/main/backend)

@@ -417,13 +417,21 @@ Ideally, you would also test to make sure your website is accessible to a screen
 
 ### Automated Checkers
 
-You can also write built-in accessibility checks in CICD. For an example on the ACM website, look at [this PR](https://github.com/uclaacm/website/pull/412). Using tools like `jest-axe` to check for basic accessibility violations is a useful tool to have as part of CI/CD, but is not exhaustive.
+You can also write built-in accessibility checks in CI/CD. For an example on the ACM website, look at [this PR](https://github.com/uclaacm/website/pull/412). Using packages like `jest-axe` to check for basic accessibility violations is a useful tool to have as part of CI/CD, but is not exhaustive.
 
 None of the tools we listed out single-handedly check for everything (or even most things) a website has to have to be accessible! No matter what tools you use, it's also necessary to actually look around the website yourself, check your code to ensure you're using semantic HTML, and attempt to navigate it just using your keyboard.
 
 ## What's Next?
 
+This workshop is in no way an exhaustive discussion of accessibility! Accessibility is constantly evolving as we find new ways to make websites more accessible and it becomes more common and necessary to ensure user-facing content is accessible. While there's no "follow these steps and you're done" solution to accessibility, you now know a lot of the basic principles and ideas to keep in mind when building a website!
+
+The next time you build a website, keep some of the ideas you learned today in mind and you'll end up building something more accessible, meaning a larger chunk of the population will be able to use your content!
+
 ## Conclusion
+
+We've learned the basics of web accessibility, things to keep in mind when building a website, and tools you can use to check if your website is accessible! 
+
+Next up, we'll be talking about deployment.
 
 ## References
 
