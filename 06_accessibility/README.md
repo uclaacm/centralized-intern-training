@@ -29,7 +29,7 @@ Welcome to an introduction to accessibility on the web! After this workshop, you
     - [Setting Title](#setting-title)
 - [Tools](#tools)
     - [Accessibility Subtabs](#accessibility-subtabs)
-    - [Lighthouse Monitor](#lighthouse-monitor)
+    - [Lighthouse](#lighthouse)
     - [Screen Readers](#screen-readers)
     - [Automated Checkers](#automated-checkers)    
 - [What's Next?](#whats-next)
@@ -292,6 +292,8 @@ It's important to know when to use these to make it easier for users with impair
 
 Adding a lot of animation and videos may be tempting, but it's also possibly overwhelming for your users. Attempting to reduce motion wherever possible is generally a good idea to make your website more accessible. However, if you need to have a lot of motion or think it's essential to the purpose of your website, a good way to still maintain accessibility can be found [here](https://legends.pokemon.com/en-us/).
 
+![The Pokemon Legends: Arceus website, with a reduce motion toggle at the top](images/pokemon-reduce-motion.png)
+
 As you see on the top of the page, while the page does have many moving elements aimed at generating interest and showing off different features - there's a toggle to completely stop those, making the website static and hopefully more accessible to users who have a hard time with motion! 
 
 ### Autoplay
@@ -316,7 +318,7 @@ For example, let's look at ACM's Internship page at [uclaacm.com/internship](htt
 
 If an element can be focused using the keyboard, then it should be interactive; that is, the user should be able to do something to it and produce a change of some kind (for example, activating a link or changing an option). 
 
-Additionally, it's important to make sure any focusable element has focus styling - meaning it looks different when it's focused. This is because visual impairment comes in many forms, so we also have to ensure it's visible which element is focused (plus I think it's annoying when I'm tabbing through something and I have no idea where in the website I am because nothing changed??)
+Additionally, it's important to make sure any focusable element has focus styling - meaning it looks different when it's focused. This is because visual impairment exists in many forms, so we also have to ensure it's visible which element is focused (plus I think it's annoying when I'm tabbing through something and I have no idea where in the website I am because nothing changed??)
 
 ### Tabbing
 
@@ -370,10 +372,54 @@ Set the document `<title>` to correctly describe the current page content as thi
 In React, this can be set using the [React Document Title Component](https://github.com/gaearon/react-document-title)
 
 ## Tools
+
 ### Accessibility Subtabs
-### Lighthouse Monitor
+
+Both Chrome and Firefox have accessibility subtabs in their dev tools. Chrome allows you to run audits on accessibility along with other areas such as performance and SEO. Firefox allows you to view a page with contrast loss or color blindness, and lets you see the tabbing order of elements on a page.
+
+[Chrome accessibility tools](https://developer.chrome.com/docs/devtools/accessibility/reference/)
+
+[Firefox accessibility tools](https://developer.mozilla.org/en-US/docs/Tools/Accessibility_inspector)
+
+These tools are in the inspect element panel, and along with using the mobile view for testing responsiveness, these can be used to make sure your website is accessible as well!
+
+### Lighthouse
+
+[Lighthouse](https://developers.google.com/web/tools/lighthouse) is a Chrome Dev tool you can access from the "audit" tab!
+
+Lighthouse has multiple metrics, but for th
+is workshop let's look at the _accessibility_ metric specifically.
+
+What Lighthouse checks:
+- `aria` labels and document hierarchy
+- color contrast (to an extent)
+- required elements like headings and titles
+- alt text
+
+However, Lighthouse and other automated tools don't check _everything_. Here's what Lighthouse says about checks you should do on your own:
+
+![Additional information you should manually check when using Lighthouse (listed below)](images/manual-check.png)
+
+- check if the page has a logical tab order
+- make sure interactive controls are keyboard focusable
+- make sure interactive elements indicate their purpose and state
+- the user's focus is directed to content added to a page
+- the user's focus is not accidentally trapped in a region
+- custom controls have labels and ARIA roles
+- visual order on the page is equivalent to DOM order
+- offscreen content is hidden from assistive technology (for example, by using `aria-hidden`)
+- HTML5 landmark elements are used to improve navigation (like `<section>`)
+
 ### Screen Readers
+
+Ideally, you would also test to make sure your website is accessible to a screen reader. One way to do this is to use an extension (such as the one offered by Google for Chrome)
+[Chrome screenreader extension](https://chrome.google.com/webstore/detail/screen-reader/kgejglhpjiefppelpmljglcjbhoiplfn?hl=en)
+
 ### Automated Checkers
+
+You can also write built-in accessibility checks in CICD. For an example on the ACM website, look at [this PR](https://github.com/uclaacm/website/pull/412). Using tools like `jest-axe` to check for basic accessibility violations is a useful tool to have as part of CI/CD, but is not exhaustive.
+
+None of the tools we listed out single-handedly check for everything (or even most things) a website has to have to be accessible! No matter what tools you use, it's also necessary to actually look around the website yourself, check your code to ensure you're using semantic HTML, and attempt to navigate it just using your keyboard.
 
 ## What's Next?
 
@@ -384,3 +430,4 @@ In React, this can be set using the [React Document Title Component](https://git
 - [TeachLA Accessibility on the Web](https://github.com/uclaacm/learning-lab-crash-course-su20/tree/main/13-accessibility)
 - [React docs on Accessibility](https://reactjs.org/docs/accessibility.html)
 - [W3 Web Accessibility Tutorials](https://www.w3.org/WAI/tutorials/)
+- [Google Web Fundamentals on Accessibility](https://developers.google.com/web/fundamentals/accessibility)
