@@ -15,7 +15,7 @@ Welcome to an introduction to accessibility on the web! After this workshop, you
     - [Alt Text](#alt-text)
     - [Transcripts](#transcripts)
     - [Semantic HTML](#semantic-html)
-    - [Aria Labels](#aria-labels)
+    - [Aria Attributes](#aria-attributes)
 - [Movement](#movement)
     - [Reduced Motion](#reduced-motion)
     - [Autoplay](#autoplay)
@@ -171,7 +171,7 @@ You've seen alt text before, which is displayed when an image file fails to load
 
 Always provide alt text for images that have semantic meaning. For example: a decorative background image of a stripe pattern probably does not need alt text, but an illustrative image of the company's logo probably does.
 
-A good rule of thumb is if the image adds context to the page that isn't already present in surrounding text, then alt text is needed. If nothing new is added, then `alt=""` is okay.
+A good rule of thumb is if the image adds context to the page that isn't already present in surrounding text, then alt text is needed. If nothing new is added, then `alt=""` is okay. For purely decorative images, `alt=""` works to ensure that screen readers and other assistive technologies simply ignore the image.
 
 Why can't we just omit the `alt` attribute? In the absence of alt text, screenreaders may attempt to read the file name instead.
 
@@ -221,11 +221,46 @@ Include the `controls` attribute to allow access to volume controls, video pause
 
 ### Semantic HTML
 
-### Aria Labels
+Semantic HTML is when the tags you use have _meaning_, meaning you use tags that describe the functionality of the region as opposed to random tags. 
+
+For example
+```html
+<button> send an email! </button>
+```
+is better than 
+```html
+<div> send an email! </div>
+```
+even if the div is formatted as clickable, since 
+- buttons have more suitable default stking
+- buttons are focusable and clickable by default
+- a screen reader can identify that it is a button
+
+Semantic HTML gives screen readers more context by using HTML to describe the purpose of the code it's wrapping. Another example of using semantic elements is using `<h1>` and the other heading levels as opposed to using `<div>` or `<span>` and then adding styling, since the usage of `<h1>` tells us that "this is a top level heading on the page", and using the other heading levels from `<h2>` to `<h6>` describes the structure of the page. Screen readers can use these tags as signposts for navigation, and it also makes your code more organized and easier to search through. 
+
+[Here's](https://developer.mozilla.org/en-US/docs/Web/HTML/Element#inline_text_semantics) a list of all the inline semantic elements you can use, such as `<b>`. Some non-inline semantic elements ae `<article>`, `<section>`,`<aside>`, `<header>` and `<footer>`, among others. Using these is something to keep in mind when building a new website or adding pages or features to an existing one!
+
+### Aria Attributes
+
+`aria` attributes enable screenreaders to better undertand the purposes of certain tags. 
+
+An example of this would be to use `aria-hidden` to hide non-interactive content, or purely decorative content from assistive technology (such as the carousel at the bottom of the ACM website).
+
+You can see a full list of `aria` attributes [here](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes).
+
+Two more commonly used `aria` attributes are
+- `aria-label` to label the purpose of an interactive element when the default accessible name is inaccurate or non-existent. [Examples of using `aria-label`](https://www.aditus.io/aria/aria-label/)
+- `aria-required` to indicate that user input is required before something can be submitted.
+
+It's important to know when to use these to make it easier for users with impaired vision or people using assistive technologies navigate your webpage!
 
 ## Movement
 
 ### Reduced Motion
+
+Adding a lot of animation and videos may be tempting, but it's also possibly overwhelming for your users. Attempting to reduce motion wherever possible is generally a good idea to make your website more accessible. However, if you need to have a lot of motion or think it's essential to the purpose of your website, a good way to still maintain accessibility can be found [here](https://legends.pokemon.com/en-us/).
+
+As you see on the top of the page, while the page does have many moving elements aimed at generating interest and showing off different features - there's a toggle to completely stop those, making the website static and hopefully more accessible to users who have a hard time with motion! 
 
 ### Autoplay
 
@@ -284,3 +319,4 @@ In React, this can be set using the [React Document Title Component](https://git
 
 - [TeachLA Accessibility on the Web](https://github.com/uclaacm/learning-lab-crash-course-su20/tree/main/13-accessibility)
 - [React docs on Accessibility](https://reactjs.org/docs/accessibility.html)
+- [W3 Web Accessibility Tutorials](https://www.w3.org/WAI/tutorials/)
