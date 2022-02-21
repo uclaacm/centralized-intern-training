@@ -252,6 +252,38 @@ Two more commonly used `aria` attributes are
 - `aria-label` to label the purpose of an interactive element when the default accessible name is inaccurate or non-existent. [Examples of using `aria-label`](https://www.aditus.io/aria/aria-label/)
 - `aria-required` to indicate that user input is required before something can be submitted.
 
+Another set of ARIA attributes that's commonly used and helpful is the `role` attribute! [Here](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles)'s a complete list of ARIA roles.
+
+These are used to identify the element containing the role as having equivalent functionality to something else. For example, the `tablist` role indicates a set of elements that are tabbable, and the `tab` role indicates each element inside the tablist.
+For an example, we can look at the MDN's web docs [here](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/tab_role):
+
+```html
+<div class="tabs">
+  <div role="tablist" aria-label="Sample Tabs">
+    <button role="tab" aria-selected="true" aria-controls="panel-1" id="tab-1" tabindex="0">
+          First Tab
+        </button>
+    <button role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2" tabindex="-1">
+          Second Tab
+        </button>
+    <button role="tab" aria-selected="false" aria-controls="panel-3" id="tab-3" tabindex="-1">
+          Third Tab
+        </button>
+  </div>
+  <div id="panel-1" role="tabpanel" tabindex="0" aria-labelledby="tab-1">
+    <p>Content for the first panel</p>
+  </div>
+  <div id="panel-2" role="tabpanel" tabindex="0" aria-labelledby="tab-2" hidden>
+    <p>Content for the second panel</p>
+  </div>
+  <div id="panel-3" role="tabpanel" tabindex="0" aria-labelledby="tab-3" hidden>
+    <p>Content for the third panel</p>
+  </div>
+</div>
+```
+
+Here, the `role="tablist"` attribute indicates that this div contains a list of tabbable elements, and the `aria-label` explains the purpose of this tablist. Each individual tab has a `role="tab"`, and uses `aria-selected` and `aria-controls` to explain what each button controls, with the panels using the `aria-labelledby` attribute to mark the relevant tab. JavaScript is used to modify these attributes based on what's selected (with the exact code in the website linked above and [here](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/tab_role)).
+
 It's important to know when to use these to make it easier for users with impaired vision or people using assistive technologies navigate your webpage!
 
 ## Movement
@@ -278,7 +310,39 @@ Many people are prone to seizures and can be harmed by websites with too much an
 
 ### Keyboard Accessibility
 
+For people with no visual cues, it's really important to make sure the entire website is navigable purely with the keyboard. This means ensuring that all clickable elements are tabbable and can be reached without having to physically click on them with a mouse, making sure any hidden elements that only show on mouse click can also be accessed via the keyboard, and making sure the order of tabbing through something is ensured.
+
+For example, let's look at ACM's Internship page at [uclaacm.com/internship](https://www.uclaacm.com/internship)! There's information on this page that's committee specific, and only accessible when picking the committee from the line of logos at the top. This means it's the developer's responsibility to ensure that this information is also available via the keyboard.
+
+If an element can be focused using the keyboard, then it should be interactive; that is, the user should be able to do something to it and produce a change of some kind (for example, activating a link or changing an option). 
+
+Additionally, it's important to make sure any focusable element has focus styling - meaning it looks different when it's focused. This is because visual impairment comes in many forms, so we also have to ensure it's visible which element is focused (plus I think it's annoying when I'm tabbing through something and I have no idea where in the website I am because nothing changed??)
+
 ### Tabbing
+
+When designing a page with interactive and clickable elements (such as buttons or links), it's important to make sure all those elements are accessible via tabbing. You can view your tabbing order using the accessibility tools for Chrome or Firefox that we'll talk about in a bit!
+
+Another reason to use **semantic HTML** is for this specific reason! When a button is created using a `<button>` tag, it is focusable and tabbable by default (as is using the anchor tag).
+
+The [`tabindex`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) attribute can be used to set something as tabbable. Most interactive elements are focusable by default; you can make an element focusable by adding a tabindex attribute value to it. However, you should only add tabindex if you have also made the element interactive, for example, by defining appropriate event handlers keyboard events.
+
+`tabindex=0` means that the element should be focusable in sequential keyboard navigation, after any positive tabindex values and its order is defined by the document's source order, and `tabindex=-1` means that the element is not reachable via sequential keyboard navigation, but could be focused with JavaScript or visually by clicking with the mouse.
+
+Here's an example of using `tabindex`:
+```html
+<p>Click anywhere in this pane, then try tabbing through the elements.</p>
+
+<label>First in tab order:<input type="text"></label>
+					
+<!-- DONT DO THIS, the div isnt interactive, so this probably shouldn't be focusable -->
+<div tabindex="0">Tabbable due to tabindex.</div>
+
+<div>Not tabbable: no tabindex.</div>
+
+<label>Third in tab order:<input type="text"></label>
+```
+
+When we look at the output of this, we see that the `<input>` tags are tabbable by default, meaning you don't have to specify tabindex (semantic HTML strikes again), but if we want to make a div focusable/tabbable, we need to add the `tabindex` attribute.
 
 ## Other Things
 
