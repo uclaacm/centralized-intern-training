@@ -387,8 +387,7 @@ These tools are in the inspect element panel, and along with using the mobile vi
 
 [Lighthouse](https://developers.google.com/web/tools/lighthouse) is a Chrome Dev tool you can access from the "audit" tab!
 
-Lighthouse has multiple metrics, but for th
-is workshop let's look at the _accessibility_ metric specifically.
+Lighthouse has multiple metrics, but for this workshop let's look at the _accessibility_ metric specifically.
 
 What Lighthouse checks:
 - `aria` labels and document hierarchy
