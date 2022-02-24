@@ -11,6 +11,7 @@ Last quarter we covered a bit about continuous integration and deployment with r
 - [Back End Deployment](#back-end-deployment)
   - [Server Vs Serverless Architecture](#server-vs-serverless-architecture)
   - [Server Deployment](#server-deployment)
+    - [Heroku](#heroku)
   - [Cloud Functions](#cloud-functions)
 - [Machine Independence](#machine-independence)
   - [Docker](#docker)
@@ -82,13 +83,27 @@ Compared to serverless computing like shown below: traditional servers have a fe
 
 As stated in the JAM Stack section, backend servers are normally decoupled from front-ends because they take time to warm-up and get online. Backend servers excel in good uptime and constant availability, but that comes at the cost of the upkeep necessary to keep a server running. A more modern approach that addresses the issue of the upkeep cost necessary to keep a server running is through using serverless architecture and cloud functions!
 
+### Heroku
+
+Heroku is one of the great tools that we can use to deploy backends! At its core, Heroku uses [dynos](https://www.heroku.com/dynos) which are virtualized linux containers that execute user commands and optimize server uptime!
+
+Deploying to Heroku is almost as simple as deploying via Netlify! All you have to do is add an extra `Procfile` which describes to Heroku how you want the Dyno to spin up your application. Let's look at an example Procfile and break down what it does!
+
+```Procfile
+web: node app.js
+```
+
+Heroku commaads are broken down like: <process type>: <command> , and this tells us that we want to open up a web-server that takes in incoming http requests, and when it does, we want to start our `app.js` file to keep our server up!
+
 ### Cloud Functions
 
 If backend servers are used to decouple the front-end and back-end of your project, cloud functions and serverless architecture take it one step further and separate out different tasks of your backend into different **event handlers** and has the cloud provider handling the storage/resources necessary to handle each request.
 
-![lambda](./pictures/lambda.png)
+![aws_sam](./pictures/aws_sam.png)
 
 Instead of a single server handling all of your requests, you distribute all of your backend's logic across different event handlers that fire off when you want to.
+
+![lambda](./pictures/lambda.png)
 
 Serverless computing has gotten **very** popular in the last couple of years due to a couple of key factors:
 
