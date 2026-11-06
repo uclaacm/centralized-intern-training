@@ -1,4 +1,4 @@
-let myVar = "hello";
+const myVar = "hello";
 
 function greet(person) {
   console.log("Hello there " + person + "!");
@@ -6,7 +6,7 @@ function greet(person) {
 greet("advaith");
 //console.log(greet);
 
-let peopleArr = ["advaith, amanda, sid"];
+const peopleArr = ["advaith", "amanda", "sid"];
 
 function greetEveryone(people, greeter) {
   people.forEach((person) => {

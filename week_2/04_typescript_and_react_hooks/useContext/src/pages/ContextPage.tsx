@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
+import type { ReactNode } from "react";
 import "../App.css";
 
 interface WindowContextContainer {
@@ -7,7 +8,7 @@ interface WindowContextContainer {
 }
 
 interface ProviderProps {
-  children: JSX.Element;
+  children: ReactNode;
 }
 
 const defaultWindowContext: WindowContextContainer = {
@@ -15,7 +16,7 @@ const defaultWindowContext: WindowContextContainer = {
   windowHeight: 0,
 };
 
-const WindowContext = React.createContext(defaultWindowContext);
+const WindowContext = createContext(defaultWindowContext);
 function WindowProvider(props: ProviderProps) {
   const [windowWidth, setWindowWidth] = useState(getWindowWidth());
   const [windowHeight, setWindowHeight] = useState(getWindowHeight());

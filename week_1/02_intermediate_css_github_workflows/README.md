@@ -764,16 +764,10 @@ to see a list of all of the branches that you can change to.
 To switch to another branch, you can run
 
 ```sh
-$ git checkout NAME_OF_BRANCH
-```
-
-which is the same as
-
-```sh
 $ git switch NAME_OF_BRANCH
 ```
 
-to view another branch!
+to view another branch! You'll also see the older command `git checkout NAME_OF_BRANCH`, which does the same thing.
 
 Before making a new branch, it's important that you always PULL the latest changes to a repository by running
 
@@ -786,17 +780,12 @@ so that you always get the most up-to-date version of the repository before chan
 The way that you can make a new branch is by running
 
 ```sh
-$ git checkout -b NAME_OF_BRANCH
+$ git switch -c NAME_OF_BRANCH
 ```
 
-Let's break down what this command does. Git checkout tells git that you want to switch the version of code you are looking at to the one that's contained within the other branch, and the -b command tells git that you want to create a new branch that hasn't existed yet. This creates a new branch in git history that's based off of the branch that you were currently developing in.
+The `-c` tells git that you want to create a new branch that doesn't exist yet. This creates a new branch that's based off of the branch you were currently on, and switches you to it.
 
-The above command is equivalent to
-
-```sh
-$ git branch NAME_OF_BRANCH
-$ git checkout NAME_OF_BRANCH
-```
+The older version of this command is `git checkout -b NAME_OF_BRANCH`.
 
 From here, you can do all the development that you want from a new branch, and when you push, you push to this specific branch in the remote repository.
 

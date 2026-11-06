@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
@@ -12,7 +11,7 @@
     <button id="decrementer">Downvote! </button>
     <!-- Why is the script tag here? See: https://stackoverflow.com/questions/436411/where-should-i-put-script-tags-in-html-markup -->
     <script>
-        let likeCounterElement = document.getElementById("likes-counter");
+        const likeCounterElement = document.getElementById("likes-counter");
         const buttonIncrementer = document.getElementById("incrementer")
         buttonIncrementer.addEventListener("click", function() {
             const currentLikes = Number(likeCounterElement.innerHTML);
