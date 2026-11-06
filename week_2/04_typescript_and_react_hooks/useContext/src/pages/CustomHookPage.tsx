@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 //no need for useState!
 import "../App.css";
 import { useWindowDimensions } from "../sharedLogic";

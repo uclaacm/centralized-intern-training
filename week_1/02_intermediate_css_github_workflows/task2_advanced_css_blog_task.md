@@ -16,7 +16,7 @@ Refine the layout, design, and responsiveness of your personal blog website usin
 
 ### 3. CSS Grid
 - Use CSS Grid to create a photo gallery or a more complex layout in your blog.
-- Experiment with `grid-template-columns`, `grid-template-rows`, and `grid-gap` to design grid-based layouts.
+- Experiment with `grid-template-columns`, `grid-template-rows`, and `gap` to design grid-based layouts.
 
 ## Part 2: Collaboration Using GitHub
 

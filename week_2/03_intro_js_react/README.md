@@ -8,8 +8,7 @@ Today, we'll go into an introduction to Javascript as a programming language, an
 - [Hello World](#hello-world)
 - [Node.js](#nodejs)
   - [NVM](#nvm)
-  - [Package Managers: NPM Vs Yarn](#package-managers-npm-vs-yarn)
-  - [NPM To Yarn](#npm-to-yarn)
+  - [Package Managers](#package-managers)
 - [Variables](#variables)
   - [let, var, and const](#let-var-and-const)
 - [Primitive Types](#primitive-types)
@@ -19,33 +18,39 @@ Today, we'll go into an introduction to Javascript as a programming language, an
   - [The Spread Operator](#the-spread-operator)
   - [Objects](#objects)
 - [JavaScript Functions](#javascript-functions)
-  - [First-Class Functions](#firstclass-functions)
+  - [First-Class Functions](#first-class-functions)
   - [Anonymous Functions](#anonymous-functions)
   - [Arrow Functions](#arrow-functions)
 - [For, If, While](#for-if-while)
 - [Common Issues With JavaScript](#common-issues-with-javascript)
   - [Wrong Function Arguments](#wrong-function-arguments)
   - [Refactoring Struggles](#refactoring-struggles)
+- [Modern JavaScript Syntax](#modern-javascript-syntax)
+  - [Template Literals](#template-literals)
+  - [Destructuring](#destructuring)
+  - [Optional Chaining and Nullish Coalescing](#optional-chaining-and-nullish-coalescing)
+  - [Modules: import and export](#modules-import-and-export)
+  - [Async, Await, and Fetch](#async-await-and-fetch)
 - [Manipulating the DOM](#manipulating-the-dom)
   - [`addEventListener`](#addeventlistener)
 - [What's React?](#whats-react)
-- [`create-react-app`](#create-react-app)
-  - [Understanding the `create-react-app` demo](#understanding-the-create-react-app-demo)
+- [Creating a React App With Vite](#creating-a-react-app-with-vite)
+  - [Understanding the Project](#understanding-the-project)
 - [HTML in JS: JSX](#HTML-in-JS-JSX)
   - [Including Other Files](#including-other-files)
   - [JSX Extension](#jsx-extension)
 - [Arrays](#arrays)
   - [`forEach`](#foreach)
   - [`map`](#map)
+  - [`filter`](#filter)
+  - [`find`](#find)
   - [`reduce`](#reduce)
 - [Using `map` in React](#using-map-in-react)
-  - [List and Keys](#list-and-keys)
+  - [Lists and Keys](#lists-and-keys)
 - [Functional React](#functional-react)
   - [State](#state)
   - [Props](#props)
   - [Props Vs State](#props-vs-state)
-  - [Outdated: Class Based React](#outdated-class-based-react)
-  - [Why Functional](#why-functional)
 - [Manipulating the DOM in React](#manipulating-the-dom-in-React)
 - [Conclusion](#conclusion)
 - [References](#references)
@@ -54,7 +59,7 @@ Today, we'll go into an introduction to Javascript as a programming language, an
 
 [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) is a lightweight interpreted scripting/programming language that is heavily used in Web Applications and even beyond them!
 
-[React.js](https://reactjs.org/) is a framework built on top of Javascript. **React only updates what needs to be updated**, which is one of the main reasons why it's so popular.
+[React.js](https://react.dev/) is a framework built on top of Javascript. **React only updates what needs to be updated**, which is one of the main reasons why it's so popular.
 
 ## Hello World
 
@@ -97,56 +102,45 @@ $ node FILE_NAME.js
 
 ### NVM
 
-To install Node.js and npm, we will be using another application, we will be using another program, **nvm** (node version manager). This makes it a lot easier to manage which version of node we're using. To use nvm, run either of the following scripts in your home directory:
+To install Node.js and npm, we will use another program called **nvm** (node version manager). This makes it a lot easier to manage which version of Node we're using, which matters because different projects can need different versions.
+
+- **macOS and Linux:** follow the install instructions at [nvm-sh/nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+- **Windows:** nvm doesn't run on Windows directly, so use [nvm-windows](https://github.com/coreybutler/nvm-windows), which has the same basic commands.
+
+Once nvm is installed, install the current long-term support version of Node and switch to it:
 
 ```sh
-$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+$ nvm install --lts
+$ nvm use --lts
 ```
+
+On nvm-windows, the commands are `nvm install lts` and `nvm use lts`.
+
+Verify that it worked by running `node -v` and `npm -v`, which will output the programs' version numbers.
+
+### Package Managers
+
+Node comes with a package manager called **npm** (node package manager), which installs the dependencies and external libraries for your code. These are the commands you'll use most:
 
 ```sh
-$ wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+$ npm init -y              # create a package.json for a new project
+$ npm install              # install everything listed in package.json
+$ npm install PACKAGE      # add a new dependency
+$ npm install -D PACKAGE   # add a dependency only needed during development
+$ npm run SCRIPT_NAME      # run a script from package.json
 ```
 
-Complete nvm source code, documentation, and installation troubleshooting can be found here: [https://github.com/nvm-sh/nvm](https://github.com/nvm-sh/nvm)
+- `package.json` lists your dependencies and scripts.
+- `package-lock.json` records the exact version of everything installed. **Commit this file** so that everyone gets the same versions.
+- `node_modules` is where the packages are downloaded. **Don't commit this folder**, since `npm install` can recreate it.
 
-The nvm installation script should install Node.js (and therefore npm) by default. Verify the successful installation by running <br />
-`node -v` and `npm -v`, which will output the programs' respective version numbers.
-
-If Node.js was not installed, run `nvm install --LTS` to install the latest stable version of Node.js.
-
-### Package Managers: NPM Vs Yarn
-
-With Node comes a package manager to install dependencies and external libraries for your code. Node comes with one built in, NPM, (node package manager), but we can also use Yarn instead! This is because yarn is a lot faster and there used to be security issues within NPM.
-
-### NPM To Yarn
-
-Switching from NPM to Yarn isn't that bad, you can install yarn globally through npm with
-
-```sh
-$ npm install --global yarn
-```
-
-and there's only a few differences between the two, like how `npm start` becomes `yarn start` or how `npm install PACKAGE` becomes `yarn add PACKAGE`, etc.
-
-To initialize yarn in your application, just run
-
-```
-$ yarn init
-```
-
-or
-
-```
-$ yarn init --yes
-```
-
-to skip all the prompts that appear!
+You may also see other package managers like Yarn and pnpm. They do the same job, but use the one the project already uses so that you don't end up with two conflicting lockfiles. The ACM website and membership portal both use npm.
 
 ## Variables
 
 To make variables in JavaScript, you simply call your variables with the `let` keyword.
 
-```sh
+```js
 let message = "Hello World!";
 console.log(message);
 ```
@@ -165,7 +159,7 @@ if (error) {
   let errorMessage = "oh no!";
 }
 console.log(errorMessage);
-// undefined
+// Uncaught ReferenceError: errorMessage is not defined
 ```
 
 It only maintains its scope in the "block" that it was defined in, which is roughly the nearest set of braces. This is similar to how variable declarations work in almost any other language that you know.
@@ -181,7 +175,7 @@ console.log(errorMessage);
 // "oh no!"
 ```
 
-This rarely will affect you in your day-to-day coding life, but it's probably best practice to use `let` - it's the behaviour that most programmers expect. We'll go over `var` once we get to functions!
+You should recognize `var` when you see it in older code, but **don't use it in new code**. Its scoping rules are a common source of bugs, and `let` behaves the way most programmers expect.
 
 And finally, `const`? Well, it mostly behaves how you'd think:
 
@@ -199,9 +193,11 @@ CONSTANT_OBJECT = {};
 // Uncaught TypeError: Assignment to constant variable.
 ```
 
-Okay, well that first example makes sense. But what's up with the second one? Well, recall that all data types in Javascript are objects, and therefore all variables are references.
+Okay, well that first example makes sense. But what's up with the second one? Well, a variable that holds an object or an array is really holding a **reference** to it.
 
 So, what `const` really guarantees is that the reference will always stay the same. With primitive data types, that's great: because they're immutable, once the value is created, it'll never change. But, for every non-primitive data type, the object _is mutable_, and so it can change at any point without changing the underlying reference. Long story short? Using `const` on an object, or an array, or many other data types doesn't guarantee that it's truly constant - it just can't be reassigned.
+
+**The rule to follow:** use `const` by default, and use `let` only when you need to reassign the variable.
 
 ## Primitive Types
 
@@ -715,6 +711,121 @@ console.log(callPet(newPet));
 
 This can be a **serious problem** since application crashes can be very costly for companies and we want to be able to detect our errors at the source!
 
+## Modern JavaScript Syntax
+
+Before we touch webpages, here's the syntax you'll see on nearly every line of a modern codebase, including the ACM website and membership portal.
+
+### Template Literals
+
+Backticks let you put values inside a string with `${...}`, which is easier to read than adding strings together.
+
+```js
+const name = "Joe";
+const points = 20;
+
+console.log("Hi " + name + ", you have " + points + " points");
+console.log(`Hi ${name}, you have ${points} points`);
+```
+
+### Destructuring
+
+Destructuring pulls values out of objects and arrays into their own variables.
+
+```js
+const post = { title: "My First Post", likes: 3 };
+
+const { title, likes } = post;
+console.log(title); // "My First Post"
+
+const [first, second] = ["apple", "banana"];
+console.log(second); // "banana"
+```
+
+You'll use the array form constantly in React, as in `const [count, setCount] = useState(0);`.
+
+### Optional Chaining and Nullish Coalescing
+
+Reading a property of `undefined` crashes your code. `?.` stops early and gives you `undefined` instead, and `??` supplies a default value when the left side is `null` or `undefined`.
+
+```js
+const user = { name: "Joe" };
+
+console.log(user.profile?.major); // undefined, instead of a crash
+console.log(user.profile?.major ?? "Undeclared"); // "Undeclared"
+```
+
+### Modules: import and export
+
+Real projects are split into many files. A file shares code with `export`, and other files bring it in with `import`.
+
+```js
+// math.js
+export function add(a, b) {
+  return a + b;
+}
+
+export default function double(a) {
+  return a * 2;
+}
+```
+
+```js
+// main.js
+import double, { add } from "./math.js";
+
+console.log(add(1, 2)); // 3
+console.log(double(4)); // 8
+```
+
+A file can have one **default** export, imported with any name you like, and any number of **named** exports, imported with curly braces.
+
+You'll also see an older module style in Node, including in the membership portal backend. It does the same job with different syntax:
+
+```js
+const express = require("express");
+
+module.exports = router;
+```
+
+### Async, Await, and Fetch
+
+Some work takes time, like asking a server for data. JavaScript doesn't stop and wait for it. Instead, you get a **Promise**, which is a placeholder for a value that arrives later. `await` pauses an `async` function until the value is ready.
+
+`fetch` makes a network request, and it's built into both browsers and Node.
+
+```js
+async function getTodo() {
+  try {
+    const response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+
+    if (!response.ok) {
+      throw new Error(`Request failed with status ${response.status}`);
+    }
+
+    const todo = await response.json();
+    console.log(todo.title);
+  } catch (err) {
+    console.error(err.message);
+  }
+}
+
+getTodo();
+```
+
+- `async` marks a function that uses `await`. It always returns a Promise.
+- `await` can only be used inside an `async` function or at the top level of a module.
+- `fetch` doesn't throw an error for a 404 or a 500, so check `response.ok` yourself.
+- `try`/`catch` handles anything that goes wrong.
+
+Older code uses `.then()` chains instead. You'll see these in the membership portal backend, and they do the same thing:
+
+```js
+fetch("https://jsonplaceholder.typicode.com/todos/1")
+  .then((response) => response.json())
+  .then((todo) => console.log(todo.title))
+  .catch((err) => console.error(err.message));
+```
+
 ## Manipulating the DOM
 
 Okay, but how does this help us make websites? Well, the original focus was to change the "Document Object Model", which as you may recall, is a fancy word for our webpage. Let's run through a bare-bones example:
@@ -726,7 +837,7 @@ Okay, but how does this help us make websites? Well, the original focus was to c
 ```
 
 ```js
-let likeCounterElement = document.getElementById("likes-counter");
+const likeCounterElement = document.getElementById("likes-counter");
 const buttonIncrementer = document.getElementById("incrementer");
 buttonIncrementer.addEventListener("click", function () {
   const currentLikes = Number(likeCounterElement.innerHTML);
@@ -758,14 +869,15 @@ To put the function in more definite types, its signature is a little something 
 
 That is, we specify the event to listen for (in our case `"click"`), and the function to call when said event happens.
 
-With that out of the way, let's talk about our callback function and our first const variable:
+With that out of the way, let's talk about our callback function and the element it updates:
 
 ```js
-let likeCounterElement = document.getElementById("likes-counter");
-function() {
-    const currentLikes = Number(likeCounterElement.innerHTML);
-    likeCounterElement.innerHTML= currentLikes+1;
-});
+const likeCounterElement = document.getElementById("likes-counter");
+
+function () {
+  const currentLikes = Number(likeCounterElement.innerHTML);
+  likeCounterElement.innerHTML = currentLikes + 1;
+}
 ```
 
 We declare a variable to be the element on our page with ID "likes-counter", cast the contents of its HTML (the `.innerHTML` field) to a `Number`, then set its `.innerHTML` field to said number + 1. That is, it increments the numerical value of the innerHTML of `likes-counter`.
@@ -787,66 +899,60 @@ Sure, there are other libraries out there like Vue and Angular (or Svelte), but 
 
 What this means is that if you are running something that handles a ridiculous amount of data, like [Open MCT](https://nasa.github.io/openmct/), every time a new piece of data comes in, you don't have to update every single element of the interface.
 
-Of course, it always helps when your technology is built by Facebook and open-sourced, as well.
+Of course, it always helps when your technology is built by Meta and open-sourced, as well.
 
-## `create-react-app`
+## Creating a React App With Vite
 
-`create-react-app` is a tool made by Facebook that **bootstraps** (see: sets up) an NPM package with handy scripts, all the dependencies you need, and a sample app for you to get started with! All we need to do to create our app is run:
+[Vite](https://vite.dev/) is a build tool that **bootstraps** (see: sets up) a React project with a development server, all the dependencies you need, and a sample app to get started with. All we need to do to create our app is run:
 
 ```sh
-npx create-react-app <folderName>
+$ npm create vite@latest my-blog -- --template react
+$ cd my-blog
+$ npm install
+$ npm run dev
 ```
 
-Once this runs, you'll create a new package with all the dependencies for a react app already installed, and a handful of scripts to run, test, and build your app at your disposal. More specifically,
+You may see older tutorials use `create-react-app`. That tool is deprecated, so don't use it for new projects.
 
-- We can install our dependencies with `yarn install`
-  - When you install, you'll see a `yarn.lock` file appear. This contains all the exact dependencies that we need. Don't forget to commit this to Github! (The npm equivalent is called `package-lock.json` and if you ever use npm, don't forget to commit it). You don't have to commit `node_modules` though, since it's just all the dependencies that you specified in the `yarn.lock` file and is downloaded to your computer.
-- We can serve the project locally with `yarn start`
-- We can build the project for production with `yarn build`
-- We can run any tests we have written with `yarn test`
+Once this runs, Vite prints a local URL, usually `http://localhost:5173`. Open it in your browser to see the demo app. Here are the scripts it gives us:
 
-The equivalents using `npm` are:
+- `npm run dev` serves the project locally and reloads when you save.
+- `npm run build` builds the project for production.
+- `npm run preview` serves the production build locally.
+- `npm run lint` checks your code for common mistakes.
 
-- We can install our dependencies with `npm install`
-- We can serve the project locally with `npm start`
-- We can build the project for production with `npm build`
-- We can run any tests we have written with `npm test`
+You can take a look at (and edit!) the dependencies and scripts in `package.json`.
 
-You can take a look at (and edit!) the package.json dependencies, scripts, and linters!
+### Understanding the Project
 
-Let's run the demo. Change directories into the folder we just made, and run `yarn start`. This will begin serving the application on a development server so that we can see what the app looks like at present.
+Let's investigate how this all works. The page itself lives in `index.html`, which is nearly empty apart from `<div id="root"></div>`. The file `src/main.jsx` tells React to draw our app inside that div:
 
-You should get a page that looks like:
+```jsx
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import App from "./App.jsx";
 
-![a rotating atom, the logo for React](images/craDemo.png)
+createRoot(document.getElementById("root")).render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
+```
 
-Let's investigate how this all works.
+The file we'll spend our time in is `src/App.jsx`. Replace everything in it with this:
 
-### Understanding the `create-react-app` demo
-
-Well, judging by the fact that the webpage tells us to "Edit src/App.js and save to reload.", why don't we do just that?
-
-Navigate in your package folder to [src/App.js](src/App.js). Once in, we can see what it is that React wants us to edit:
-
-```js
-import React from "react";
-import logo from "./logo.svg";
+```jsx
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+      <header>
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Edit <code>src/App.jsx</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href="https://react.dev" target="_blank" rel="noopener noreferrer">
           Learn React
         </a>
       </header>
@@ -857,12 +963,11 @@ function App() {
 export default App;
 ```
 
-Pretty short and sweet! If we change something in the file, we can see that the webpage on our browser will automatically reflect our changes. So what does this demo tell us?
+Pretty short and sweet! If we change something in the file, the webpage in our browser automatically reflects our changes. So what does this tell us?
 
 - We can return HTML as easily as anything else.
 - We can import CSS files and others - not just JS - to our code.
   - Notice we import `./App.css`, and its styles are applied to the component.
-  - Notice how we import `logo.svg` as `logo` and then use it later as a value: `src={logo}`.
 - Some of our HTML properties exist under a different name.
   - `class` becomes `className`, for example.
 
@@ -870,51 +975,45 @@ Pretty short and sweet! If we change something in the file, we can see that the 
 
 The first thing that we mention is one of React's great parts. This is something called JSX. It allows us to pass around HTML as easily as anything else in React.
 
-If we are passing it around, though, it needs to all be contained in a single container tag. Notice how our return statement up above wraps it in a `<div>` tag?
+If we are passing it around, though, it needs to all be contained in a single parent tag. Notice how our return statement up above wraps everything in a `<div>` tag? If you don't want an extra `<div>` on the page, you can use an empty tag called a **fragment**:
 
-In any case, let's change up the structure a little bit by adding in an `<h1>` tag:
-
-```js
-// ...
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>Hello</h1>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-// ...
+```jsx
+return (
+  <>
+    <h1>Hello</h1>
+    <p>No extra div here!</p>
+  </>
+);
 ```
 
-Better yet, let's try adding in the header tag but use a variable:
+Let's add a heading that uses a variable:
 
-```js
-// ...
+```jsx
 function App() {
   const greeting = "Hello";
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+      <header>
         <h1>{greeting}</h1>
-// ...
+      </header>
+    </div>
+  );
+}
 ```
 
-This is where things get interesting. We can intersperse JavaScript results throughout our JSX by encapsulating them with curly braces. In this case, we used a variable, but we can use any output we wish. Consider using a function, for example:
+This is where things get interesting. We can put any JavaScript expression inside our JSX by wrapping it in curly braces. In this case we used a variable, but we can call functions too:
 
-```js
-<h1>{function(g) { return g + 'extra'; }(greeting)}</h1> # TODO
+```jsx
+<h1>{greeting.toUpperCase()}</h1>
 ```
 
-Certainly unconventional, but it works. This takes our constant `greeting` and appends `'extra'` to it.
+Two patterns you'll see all the time are the ternary, which chooses between two options, and `&&`, which shows something only when a condition is true:
 
-A common pattern you'll see in JSX is use of ternary:
-
-```js
-<h1>{greeting ? greeting : "hello"}</h1>
+```jsx
+<p>{isLoggedIn ? "Welcome back!" : "Please log in."}</p>
+{isAdmin && <button>Delete</button>}
 ```
-
-If the value `greeting` is truthy, then it will be returned. Otherwise, 'hello' is returned. This is handy for dealing with values we might not be sure exist.
 
 #### Things that were renamed
 
@@ -923,7 +1022,7 @@ There are a few properties from HTML that have been renamed in React's JSX. That
 - `class` -> `className`
 - `onchange` -> `onChange`
 
-Notice the trend? **DOM element names have just been made camel-cased**. That's all there is to it! A more complete list (including how inline styling has changed), can be found [here](https://reactjs.org/docs/dom-elements.html).
+Notice the trend? **DOM element names have just been made camel-cased**. That's all there is to it! A more complete list (including how inline styling has changed), can be found [here](https://react.dev/reference/react-dom/components/common).
 
 ### Including other files
 
@@ -933,7 +1032,7 @@ Typically for a React component, this means that we style our JSX through a CSS 
 
 ### JSX Extension
 
-The extension for javasript files, whether or not it has "Javascript Expressions" or JSX, is `.js`, and we see this with the files we're working with.
+Files that contain JSX use the `.jsx` extension, like `App.jsx`. Next week, we will use `.tsx` for the TypeScript version.
 
 ## Arrays
 
@@ -958,29 +1057,46 @@ cats.forEach((cat) => console.log(cat + " says 'meow i want food' :("));
 To iterate on each value, and return the results (in an array), we can use `map`
 
 ```jsx
-cats.map((cat) => <>{cat} wants food >:0</>);
+const messages = cats.map((cat) => `${cat} wants food >:0`);
+```
+
+### `filter`
+
+To keep only the values that pass a test, we can use `filter`
+
+```jsx
+const shortNames = cats.filter((cat) => cat.length < 7);
+// ["oscar"]
+```
+
+### `find`
+
+To get the first value that passes a test, we can use `find`
+
+```jsx
+const oscar = cats.find((cat) => cat === "oscar");
+// "oscar"
 ```
 
 ### `reduce`
 
-To accumulate on each value, then return the accumulated result, we can use `reudce`
+To combine all of the values into a single result, we can use `reduce`. It takes a function and a starting value, and the function receives the running total and the current value.
 
 ```jsx
-cats.reduce((cat) => cat + " ");
+const totalLetters = cats.reduce((total, cat) => total + cat.length, 0);
+// 28
 ```
-
-### Other functional commands
-
-There are other things like `find`, `filter`, and others, but you can just try it out as need be! Generally those definitions above are more often used.
 
 ## Using `map` in React
 
+To show a list in React, `map` over an array and return JSX for each value:
+
 ```jsx
-{
-  cats.map((cat) => (
+<div>
+  {cats.map((cat) => (
     <div style={{ backgroundColor: "blue" }}>{cat} wants food :0</div>
-  ));
-}
+  ))}
+</div>
 ```
 
 ### Lists and Keys
@@ -989,31 +1105,36 @@ Doing the above causes
 `Warning: Each child in a list should have a unique "key" prop.`
 
 This means that every item, every `div` needs to have a key.
-This is because react renders this list by checking out whats different right, and it uses key to help determine whether to render a completely new object, or just modify it.
-If you want to learn more about how React reconcilitates things, take a look (here)[https://reactjs.org/docs/reconciliation.html]
+React uses keys to work out which items in a list were added, removed, or moved, so that it only updates what changed. A key should be unique within the list, so use something like an ID. You can read more [here](https://react.dev/learn/rendering-lists).
 
-```
-{cats.map((cat)=> <div key={cat}>{cat} wants food :0</div>)}
+```jsx
+<div>
+  {cats.map((cat) => (
+    <div key={cat}>{cat} wants food :0</div>
+  ))}
+</div>
 ```
 
 ## Functional React
 
 ### State
 
-`useState` is basically the same as setting state.
+**State** is data that a component remembers between renders. The `useState` hook creates it, and gives you back the current value and a function to change it.
 
-Remember to break up state with `[name, setName]`
+Remember to destructure state with `[name, setName]`
 
-Use `setName` to setup the new state so that React knows to rerender!
+Use `setName` to set the new state so that React knows to rerender!
 
 ```jsx
+import { useState } from "react";
+
 function App() {
   const [number, setNumber] = useState(0);
   return (
     <div className="App">
       <header className="App-header">
         {number}
-        <button onClick={() => setNumber(number + 1)} />
+        <button onClick={() => setNumber(number + 1)}>Add one</button>
       </header>
     </div>
   );
@@ -1022,34 +1143,45 @@ function App() {
 
 ### Props
 
-This is the original input passed into a function
-
-- Imagine this as the things you put into a constructor
+**Props** are the inputs passed into a component, like the arguments of a function. A parent component passes them down, and the child reads them.
 
 ```jsx
 function Cats(props) {
   return <div>{props.name}</div>;
 }
+
 function App() {
   const cats = ["pickles", "oscar", "mittens", "meow meow"];
 
-  const [number, setNumber] = useState(0);
   return (
     <div className="App">
       <header className="App-header">
         {cats.map((cat) => (
-          <Cats name={cat} />
+          <Cats key={cat} name={cat} />
         ))}
-        <button onClick={() => setNumber(number + 1)} />
       </header>
     </div>
   );
 }
 ```
 
+You'll usually see props destructured right in the function's parameters, which is the style used in our projects:
+
+```jsx
+function Cats({ name }) {
+  return <div>{name}</div>;
+}
+```
+
 ### Props vs State
 
-Imagine Props as the constructor variables in C++, and the state as the member variables! **You cannot modify state directly, you have to use `setState` in order to set the state.** This is because React only knows to rerender (the parts of) your component based on when which states have changed from `setState`.
+Props come from the parent and are read-only, while state belongs to the component and changes over time. **You cannot modify state directly, you have to use the setter function from `useState`.** This is because React only knows to rerender your component when the setter is called.
+
+This also applies to arrays and objects in state. Create a new one with the spread operator instead of changing the existing one:
+
+```jsx
+setPosts([...posts, newPost]); // not posts.push(newPost)
+```
 
 Let’s combine these topics so that every time you press a button, the number of cats you own increases!
 Let’s bring the button and number logic into the Cats function
@@ -1074,7 +1206,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         {cats.map((cat) => (
-          <Cats name={cat} />
+          <Cats key={cat} name={cat} />
         ))}
       </header>
     </div>
@@ -1106,7 +1238,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         {cats.map((cat) => (
-          <Cats name={cat} startingPoint={4} />
+          <Cats key={cat} name={cat} startingPoint={4} />
         ))}
       </header>
     </div>
@@ -1114,55 +1246,12 @@ function App() {
 }
 ```
 
-### Outdated: Class Based React
-
-This is getting phased out. This is just for reference!
-
-```jsx
-class ComponentName extends React.Component {
-  render() {
-    return <div>HI I AM COMPONENT</div>;
-  }
-}
-```
-
-### State and Props
-
-See here for more details: https://reactjs.org/docs/state-and-lifecycle.html
-
-```jsx
-class ComponentName extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { date: new Date() };
-  }
-  tick() {
-    this.setState({
-      date: new Date(),
-    });
-  }
-  render() {
-    return <div>HI I AM COMPONENT {this.state.date.toLocaleTimeString()}</div>;
-  }
-}
-```
-
-`componentDidMount`, `componentWillUnmount` => things happen when the Component starts up and when it is deleted
-
-## Why Functional
-
-- Lightweight
-- Easier to read
-- Nice hooks (like the `useState` stuff)
-- Performance boost
-- Basically barely any pros for Class based, so I’d recommend defaulting to functional
-
 ## Manipulating the DOM in React
 
 Now, let's make the same upvote counter we made in js using React. Here's a bare-bones example.
 
 ```jsx
-import React, { useState } from "react";
+import { useState } from "react";
 
 function App() {
   const [counter, setCounter] = useState(0);

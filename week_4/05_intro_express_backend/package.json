@@ -1,6 +1,9 @@
 {
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node --watch app.js"
+  },
   "dependencies": {
-    "express": "^4.17.2",
-    "node-fetch": "^3.2.0"
+    "express": "^5.1.0"
   }
 }

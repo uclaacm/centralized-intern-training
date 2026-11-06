@@ -385,7 +385,7 @@ These tools are in the inspect element panel, and along with using the mobile vi
 
 ### Lighthouse
 
-[Lighthouse](https://developers.google.com/web/tools/lighthouse) is a Chrome Dev tool you can access from the "audit" tab!
+[Lighthouse](https://developer.chrome.com/docs/lighthouse/overview) is a Chrome Dev tool you can access from the "audit" tab!
 
 Lighthouse has multiple metrics, but for this workshop let's look at the _accessibility_ metric specifically.
 
@@ -435,6 +435,6 @@ Next up, we'll be talking about deployment.
 ## References
 
 - [TeachLA Accessibility on the Web](https://github.com/uclaacm/learning-lab-crash-course-su20/tree/main/13-accessibility)
-- [React docs on Accessibility](https://reactjs.org/docs/accessibility.html)
+- [Next.js docs on Accessibility](https://nextjs.org/docs/architecture/accessibility)
 - [W3 Web Accessibility Tutorials](https://www.w3.org/WAI/tutorials/)
-- [Google Web Fundamentals on Accessibility](https://developers.google.com/web/fundamentals/accessibility)
+- [web.dev Learn Accessibility](https://web.dev/learn/accessibility)
