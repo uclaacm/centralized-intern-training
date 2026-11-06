@@ -9,6 +9,7 @@ Today, we'll go into an introduction to Javascript as a programming language, an
 - [Node.js](#nodejs)
   - [NVM](#nvm)
   - [Package Managers](#package-managers)
+  - [npm in ACM Repositories](#npm-in-acm-repositories)
 - [Variables](#variables)
   - [let, var, and const](#let-var-and-const)
 - [Primitive Types](#primitive-types)
@@ -120,21 +121,52 @@ Verify that it worked by running `node -v` and `npm -v`, which will output the p
 
 ### Package Managers
 
-Node comes with a package manager called **npm** (node package manager), which installs the dependencies and external libraries for your code. These are the commands you'll use most:
+A package manager installs the dependencies and external libraries for your code. Node comes with one called **npm** (node package manager), but in this training we'll use [pnpm](https://pnpm.io/), which does the same job. It's popular because it's fast, and it saves disk space by keeping one copy of each package on your computer and sharing it between your projects.
+
+Install it with npm, then check that it worked:
 
 ```sh
-$ npm init -y              # create a package.json for a new project
-$ npm install              # install everything listed in package.json
-$ npm install PACKAGE      # add a new dependency
-$ npm install -D PACKAGE   # add a dependency only needed during development
-$ npm run SCRIPT_NAME      # run a script from package.json
+$ npm install -g pnpm
+$ pnpm -v
+```
+
+These are the commands you'll use most:
+
+```sh
+$ pnpm init --init-type commonjs   # create a package.json for a new Node project
+$ pnpm install                     # install everything listed in package.json
+$ pnpm add PACKAGE                 # add a new dependency
+$ pnpm add -D PACKAGE              # add a dependency only needed during development
+$ pnpm run SCRIPT_NAME             # run a script from package.json
+$ pnpm exec TOOL                   # run a tool that's installed in your project
+$ pnpm dlx TOOL                    # run a tool without installing it
 ```
 
 - `package.json` lists your dependencies and scripts.
-- `package-lock.json` records the exact version of everything installed. **Commit this file** so that everyone gets the same versions.
-- `node_modules` is where the packages are downloaded. **Don't commit this folder**, since `npm install` can recreate it.
+- `pnpm-lock.yaml` records the exact version of everything installed. **Commit this file** so that everyone gets the same versions.
+- `node_modules` is where the packages are downloaded. **Don't commit this folder**, since `pnpm install` can recreate it.
 
-You may also see other package managers like Yarn and pnpm. They do the same job, but use the one the project already uses so that you don't end up with two conflicting lockfiles. The ACM website and membership portal both use npm.
+Some packages run a script when they're installed, and pnpm blocks these by default for security. If you see `ERR_PNPM_IGNORED_BUILDS`, your packages were still installed. Run `pnpm approve-builds` to choose which scripts to allow, and only approve packages that you trust. Your choices are saved in `pnpm-workspace.yaml`, which you should also commit. **Be careful about running
+this command as common supply chain attacks
+manifest in this way.**
+
+### npm in ACM Repositories
+
+**For a shared project, always use the package manager that the project already uses.** Using two creates lockfiles that can disagree, so people end up with different versions of packages.
+
+We use pnpm for the projects in this training, but the ACM website and the membership portal are built with npm, so use npm when you work in those repositories. You may notice a `pnpm-lock.yaml` in `membership-portal-ui`, but its Docker builds and GitHub workflows use npm. Luckily, the commands are very similar:
+
+| What you want to do            | pnpm                              | npm                        |
+| ------------------------------ | --------------------------------- | -------------------------- |
+| Install everything             | `pnpm install`                    | `npm install`              |
+| Add a dependency               | `pnpm add PACKAGE`                | `npm install PACKAGE`      |
+| Add a development dependency   | `pnpm add -D PACKAGE`             | `npm install -D PACKAGE`   |
+| Remove a dependency            | `pnpm remove PACKAGE`             | `npm uninstall PACKAGE`    |
+| Run a script                   | `pnpm run SCRIPT_NAME`            | `npm run SCRIPT_NAME`      |
+| Run a tool without installing  | `pnpm dlx TOOL`                   | `npx TOOL`                 |
+| Install exactly what's locked  | `pnpm install --frozen-lockfile`  | `npm ci`                   |
+
+npm's lockfile is called `package-lock.json`. You may also see Yarn, which is another package manager that works in a similar way.
 
 ## Variables
 
@@ -906,20 +938,20 @@ Of course, it always helps when your technology is built by Meta and open-source
 [Vite](https://vite.dev/) is a build tool that **bootstraps** (see: sets up) a React project with a development server, all the dependencies you need, and a sample app to get started with. All we need to do to create our app is run:
 
 ```sh
-$ npm create vite@latest my-blog -- --template react
+$ pnpm create vite my-blog --template react
 $ cd my-blog
-$ npm install
-$ npm run dev
+$ pnpm install
+$ pnpm dev
 ```
 
 You may see older tutorials use `create-react-app`. That tool is deprecated, so don't use it for new projects.
 
 Once this runs, Vite prints a local URL, usually `http://localhost:5173`. Open it in your browser to see the demo app. Here are the scripts it gives us:
 
-- `npm run dev` serves the project locally and reloads when you save.
-- `npm run build` builds the project for production.
-- `npm run preview` serves the production build locally.
-- `npm run lint` checks your code for common mistakes.
+- `pnpm dev` serves the project locally and reloads when you save.
+- `pnpm build` builds the project for production.
+- `pnpm run preview` serves the production build locally.
+- `pnpm lint` checks your code for common mistakes.
 
 You can take a look at (and edit!) the dependencies and scripts in `package.json`.
 

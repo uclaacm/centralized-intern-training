@@ -5,8 +5,8 @@ Compares prop drilling, custom hooks, and context by showing the size of the win
 To run this example, use:
 
 ```sh
-$ npm install
-$ npm run dev
+$ pnpm install
+$ pnpm dev
 ```
 
 Then, open the URL shown in your terminal.

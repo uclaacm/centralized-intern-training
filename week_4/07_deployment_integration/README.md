@@ -137,11 +137,13 @@ Let's take a look at a Dockerfile for an Express app and break down what exactly
 ```Dockerfile
 # Start from an image that already has Node installed
 FROM node:22-alpine
+# Install pnpm, since the image only comes with npm
+RUN npm install -g pnpm
 # Run the rest of these commands inside of the /app folder
 WORKDIR /app
 # Copy over the dependency list, and install what's on it
-COPY package*.json ./
-RUN npm ci --omit=dev
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml* ./
+RUN pnpm install --prod --frozen-lockfile
 # Copy over the rest of our source code
 COPY . .
 # Document that the app listens on port 8080
@@ -150,7 +152,7 @@ EXPOSE 8080
 CMD ["node", "server.js"]
 ```
 
-We copy `package.json` before our code on purpose. Docker saves each step, so if only your code changes, it can skip reinstalling all of your dependencies.
+We copy the dependency files before our code on purpose. Docker saves each step, so if only your code changes, it can skip reinstalling all of your dependencies.
 
 You should also add a `.dockerignore` file so that your local files don't get copied in:
 
@@ -216,7 +218,7 @@ $ docker compose logs -f api  # follow the logs of one service
 $ docker compose down         # stop everything
 ```
 
-This is how you run the membership portal on your computer. The ports it uses are `8000` for the frontend and `8080` for the backend. Follow the setup steps in the `membership-portal-deployment` README, and ask a lead for the password that you need to generate the environment file. Since the dependencies are installed inside of the containers, **don't run `npm install` locally** in the portal repositories.
+This is how you run the membership portal on your computer. The ports it uses are `8000` for the frontend and `8080` for the backend. Follow the setup steps in the `membership-portal-deployment` README, and ask a lead for the password that you need to generate the environment file. Since the dependencies are installed inside of the containers, **don't run `npm install` or `pnpm install` locally** in the portal repositories.
 
 ### Deployment From Github
 
@@ -227,7 +229,14 @@ By using version control like GitHub, one can ensure that across their team, eve
 How do you know your change didn't break something else? You could click around the whole site each time, or you could write **automated tests** that check for you. Both the ACM website and the membership portal use [Jest](https://jestjs.io/).
 
 ```sh
-$ npm install -D jest supertest
+$ pnpm add -D jest supertest
+```
+
+This ends with an `ERR_PNPM_IGNORED_BUILDS` error about `@parcel/watcher`. Your packages are still installed, and Jest works without that script, but a fresh install will keep failing until you make a decision about it. To turn the script down, create a file named `pnpm-workspace.yaml` with these lines, and commit it:
+
+```yml
+allowBuilds:
+  "@parcel/watcher": false
 ```
 
 Add a script to your `package.json`:
@@ -331,7 +340,7 @@ The membership portal's backend tests work the same way. For examples, see `test
 
 ### Running Tests in ACM Projects
 
-| Project                  | Command                                                  |
+| Project                  | Command (these projects use npm)                         |
 | ------------------------ | -------------------------------------------------------- |
 | ACM website              | `npm test`                                               |
 | Membership portal UI     | `npm test`                                               |
@@ -362,23 +371,26 @@ jobs:
       - name: Checkout Git repo
         uses: actions/checkout@v4
 
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6
+
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
+          cache: pnpm
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Run linter
-        run: npm run lint
+        run: pnpm run lint
 
       - name: Run tests
-        run: npm test
+        run: pnpm test
 ```
 
-What this github action does, is that on every Pull Request and every push to `main`, it installs the dependencies we need and runs our linter and tests, failing if there are any errors! `npm ci` is like `npm install`, except that it installs exactly what's in `package-lock.json`. This tool can be pretty powerful, as some errors can slip through the cracks and CI/CD can help prevent errors such as these from happening.
+What this github action does, is that on every Pull Request and every push to `main`, it installs the dependencies we need and runs our linter and tests, failing if there are any errors! `--frozen-lockfile` installs exactly what's in `pnpm-lock.yaml`, and fails if it doesn't match `package.json`. The pnpm step uses the version listed under `packageManager` in your `package.json`, which `pnpm init` adds for you. The ACM repositories use npm, so their workflows use `npm ci`, which does the same thing. This tool can be pretty powerful, as some errors can slip through the cracks and CI/CD can help prevent errors such as these from happening.
 
 The ACM website and the membership portal both run checks like these on Pull Requests, and you can read their workflows in each repository's `.github/workflows` folder.
 

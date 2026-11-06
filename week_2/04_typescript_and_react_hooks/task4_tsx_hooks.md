@@ -6,7 +6,7 @@ Refactor the personal blog website to use TypeScript for type safety and explore
 ### Part 1: Refactoring with TypeScript
 
 1. Convert JavaScript to TypeScript:
-   - Create a TypeScript project with `npm create vite@latest my-blog-ts -- --template react-ts`.
+   - Create a TypeScript project with `pnpm create vite my-blog-ts --template react-ts`.
    - Copy your `src` files from Task 3 into the new project.
    - Rename your `.jsx` files to `.tsx` (for files with JSX) and your `.js` files to `.ts` (for others).
    - Introduce static typing to your components, state, and props.

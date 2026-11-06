@@ -6,7 +6,7 @@ Add tests to your blog's API, run it in Docker, and set up Continuous Integratio
 ## Part 1: Testing
 
 1. Split your API into `app.js` and `server.js`, so that your tests can import your app.
-2. Install Jest and Supertest, and add a `test` script.
+2. Install Jest and Supertest, add a `test` script, and create the `pnpm-workspace.yaml` from the lesson.
 3. Write a unit test for at least one helper function.
 4. Using Supertest, write tests that check for:
    - A successful `GET /api/posts`
@@ -23,7 +23,7 @@ Add tests to your blog's API, run it in Docker, and set up Continuous Integratio
 
 ## Part 3: Continuous Integration
 
-1. Add ESLint to your API with `npm init @eslint/config@latest`, and add a `lint` script.
+1. Add ESLint to your API with `pnpm create @eslint/config@latest`, and add a `lint` script.
 2. Add a GitHub Actions workflow that runs your linter and your tests on every Pull Request.
 3. Your tests need a database, so add Postgres to your workflow using a [service container](https://docs.github.com/en/actions/tutorials/use-containerized-services/create-postgresql-service-containers).
 4. Make a Pull Request with a test that fails on purpose, and check that the workflow fails. Then fix it, and check that it passes.

@@ -5,8 +5,8 @@ Build an Express API that stores your blog's posts in a Postgres database, and c
 
 ## Part 1: Setting Up
 
-1. Create a new folder called `blog-api`, and run `npm init -y`.
-2. Install your dependencies: `npm install express sequelize pg dotenv express-validator`.
+1. Create a new folder called `blog-api`, and run `pnpm init --init-type commonjs`. The `--init-type commonjs` part lets you use `require`, like the examples in the lesson.
+2. Install your dependencies: `pnpm add express sequelize pg dotenv express-validator`.
 3. Add a `.gitignore` that includes `node_modules` and `.env`.
 4. Add the `docker-compose.yml` from the lesson, and start your database.
 5. Create your `.env` file with your `DATABASE_URL`.

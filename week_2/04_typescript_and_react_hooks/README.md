@@ -144,15 +144,15 @@ While JavaScript is an **interpreted language**, which means that it gets read b
 Since TypeScript is built on top of JavaScript, we're going to need to add it to our project's dependencies with:
 
 ```sh
-$ npm install -D typescript
+$ pnpm add -D typescript
 ```
 
-This gives us access to the TypeScript compiler, `tsc`, which we run through `npx`.
+This gives us access to the TypeScript compiler, `tsc`, which we run through `pnpm exec`.
 
 To initialize TypeScript in our project, we have to run:
 
 ```sh
-$ npx tsc --init
+$ pnpm exec tsc --init
 ```
 
 This creates a `tsconfig.json` file in the root of our current directory and allows us to customize what we want TypeScript to allow or do.
@@ -160,7 +160,7 @@ This creates a `tsconfig.json` file in the root of our current directory and all
 We can compile a single file with:
 
 ```sh
-$ npx tsc path/to/file.ts
+$ pnpm exec tsc path/to/file.ts
 ```
 
 This checks for errors and creates a JavaScript version of the file next to it.
@@ -170,7 +170,7 @@ The great thing about it is that it checks for type errors **before** we have to
 For a React project, you don't need to set any of this up by hand. Vite creates a project with TypeScript already configured:
 
 ```sh
-$ npm create vite@latest my-blog-ts -- --template react-ts
+$ pnpm create vite my-blog-ts --template react-ts
 ```
 
 Now, let's go over some of the usages of TypeScript with some examples in small node scripts!
@@ -207,7 +207,7 @@ the function `divideTwoNums` also returns a number!
 When we compile with
 
 ```sh
-$ npx tsc tsTests.ts
+$ pnpm exec tsc tsTests.ts
 ```
 
 it compiles to regular old JavaScript!
@@ -564,7 +564,7 @@ The membership portal shares most of its state with [Jotai](https://jotai.org/) 
 Install it with:
 
 ```sh
-$ npm install jotai
+$ pnpm add jotai
 ```
 
 ### Creating Atoms

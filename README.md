@@ -8,7 +8,7 @@ Every module has a lesson and a short project. If you feel like you already have
 
 ## One Project, Built Up Over Time
 
-The projects all build on each other. You'll start with a personal blog made with plain HTML and CSS, and by the end it will be a full stack app, so keep your code from each project!
+The projects all build on each other. You'll start with a personal blog made with plain HTML and CSS, and by the end it will be a full stack app, so keep your code from each project! We use [pnpm](https://pnpm.io/) for these projects, starting in week 2.
 
 ## Table of Contents
 
@@ -18,7 +18,7 @@ The projects all build on each other. You'll start with a personal blog made wit
 | ---- | ------ | ----------------- | ------- |
 | 1 | [HTML, CSS, and GitHub](./week_1/01_html_css_github/README.md) | HTML, CSS, Git, GitHub Pages | [Build and publish your blog](./week_1/01_html_css_github/task_1_personal_blog_website.md) |
 | 1 | [Intermediate CSS and GitHub Workflows](./week_1/02_intermediate_css_github_workflows/README.md) | Box model, Flexbox, Grid, branches, Pull Requests | [Improve your blog's layout](./week_1/02_intermediate_css_github_workflows/task2_advanced_css_blog_task.md) |
-| 2 | [JavaScript and React](./week_2/03_intro_js_react/README.md) | JavaScript, async/await, Node, npm, Vite, components, state, props | [Rebuild your blog in React](./week_2/03_intro_js_react/task3_js_react.md) |
+| 2 | [JavaScript and React](./week_2/03_intro_js_react/README.md) | JavaScript, async/await, Node, pnpm, Vite, components, state, props | [Rebuild your blog in React](./week_2/03_intro_js_react/task3_js_react.md) |
 | 2 | [TypeScript and React Hooks](./week_2/04_typescript_and_react_hooks/README.md) | TypeScript, useEffect, useContext, Jotai | [Add types and shared state](./week_2/04_typescript_and_react_hooks/task4_tsx_hooks.md) |
 | 3 | [Next.js](./week_3/05_nextjs/README.md) | Routing, server and client components, server actions | [Move your blog to Next.js](./week_3/05_nextjs/task5_nextjs.md) |
 | 4 | [Backend With Express](./week_4/05_intro_express_backend/README.md) | Express, middleware, Postgres, Sequelize, authentication | [Build a backend for your blog](./week_4/05_intro_express_backend/task6_express_backend.md) |

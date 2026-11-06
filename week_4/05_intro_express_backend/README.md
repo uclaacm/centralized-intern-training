@@ -329,7 +329,7 @@ $ docker compose exec db psql -U dev -d blog
 Writing SQL by hand for everything gets repetitive, so many projects use an **ORM** (object-relational mapper), which lets you work with database rows as JavaScript objects. The membership portal uses [Sequelize](https://sequelize.org/).
 
 ```sh
-$ npm install sequelize pg dotenv
+$ pnpm add sequelize pg dotenv
 ```
 
 Keep the database's address in a `.env` file, which should never be committed:

@@ -38,7 +38,7 @@ Next.js addresses these with a few key features:
 Run this to create a new project with TypeScript:
 
 ```sh
-$ npx create-next-app@latest my-next-blog --ts --eslint --app --no-src-dir --no-tailwind --import-alias "@/*" --use-npm --yes
+$ pnpm dlx create-next-app@latest my-next-blog --ts --eslint --app --no-src-dir --no-tailwind --import-alias "@/*" --use-pnpm --yes
 $ cd my-next-blog
 ```
 
@@ -57,7 +57,7 @@ export default nextConfig;
 Now start your app:
 
 ```sh
-$ npm run dev
+$ pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to see your app. Here's what we care about in the project:

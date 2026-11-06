@@ -7,8 +7,8 @@ Develop a simple blog application using React.js that allows users to add, view,
 
 ### Setting up the Environment:
 
-1. Install Node.js and npm using nvm.
-2. Use Vite to create a new React project: `npm create vite@latest my-blog -- --template react`.
+1. Install Node.js using nvm, then install pnpm.
+2. Use Vite to create a new React project: `pnpm create vite my-blog --template react`.
 
 ### JavaScript Basics:
 
