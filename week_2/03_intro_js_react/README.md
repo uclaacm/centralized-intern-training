@@ -133,8 +133,8 @@ $ pnpm -v
 These are the commands you'll use most:
 
 ```sh
-$ pnpm init --init-type commonjs   # create a package.json for a new Node project
-$ pnpm install                     # install everything listed in package.json
+$ pnpm init						   # create a package.json for a new Node project
+$ pnpm install OR pnpm i           # install everything listed in package.json
 $ pnpm add PACKAGE                 # add a new dependency
 $ pnpm add -D PACKAGE              # add a dependency only needed during development
 $ pnpm run SCRIPT_NAME             # run a script from package.json
@@ -144,7 +144,7 @@ $ pnpm dlx TOOL                    # run a tool without installing it
 
 - `package.json` lists your dependencies and scripts.
 - `pnpm-lock.yaml` records the exact version of everything installed. **Commit this file** so that everyone gets the same versions.
-- `node_modules` is where the packages are downloaded. **Don't commit this folder**, since `pnpm install` can recreate it.
+- `node_modules` is where the packages are downloaded. **Don't commit this folder**, since `pnpm install`/`pnpm i` can recreate it.
 
 Some packages run a script when they're installed, and pnpm blocks these by default for security. If you see `ERR_PNPM_IGNORED_BUILDS`, your packages were still installed. Run `pnpm approve-builds` to choose which scripts to allow, and only approve packages that you trust. Your choices are saved in `pnpm-workspace.yaml`, which you should also commit. **Be careful about running
 this command as common supply chain attacks
@@ -158,7 +158,7 @@ We use pnpm for the projects in this training, but the ACM website and the membe
 
 | What you want to do            | pnpm                              | npm                        |
 | ------------------------------ | --------------------------------- | -------------------------- |
-| Install everything             | `pnpm install`                    | `npm install`              |
+| Install everything             | `pnpm install` / `pnpm i`         | `npm install`              |
 | Add a dependency               | `pnpm add PACKAGE`                | `npm install PACKAGE`      |
 | Add a development dependency   | `pnpm add -D PACKAGE`             | `npm install -D PACKAGE`   |
 | Remove a dependency            | `pnpm remove PACKAGE`             | `npm uninstall PACKAGE`    |
@@ -940,7 +940,7 @@ Of course, it always helps when your technology is built by Meta and open-source
 ```sh
 $ pnpm create vite my-blog --template react
 $ cd my-blog
-$ pnpm install
+$ pnpm i
 $ pnpm dev
 ```
 

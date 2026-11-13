@@ -5,7 +5,7 @@ Compares prop drilling, custom hooks, and context by showing the size of the win
 To run this example, use:
 
 ```sh
-$ pnpm install
+$ pnpm i
 $ pnpm dev
 ```
 
