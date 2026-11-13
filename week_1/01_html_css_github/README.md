@@ -66,10 +66,10 @@ A lot of this content is based off of a whole slew of ACM's resources from the p
   - [Git Push](#git-push)
   - [Git Stash](#git-stash)
 
-- [Main Git Workflow](#main-git-workflow)
+- [Main Git Workflow](#main-git-workflows)
 - [Hosting on Github Pages](#hosting-on-github-pages)
 - [Conclusion](#conclusion)
-- [Reference](#reference)
+- [References](#references)
 
 ## HTML
 
@@ -472,7 +472,7 @@ p {
 
 #### Writing some CSS for our website
 
-With this out of the way, let's take a look at some real CSS in the flesh. We will save this CSS in a file we call [`base.css`](base.css). Comments will be left throughout to help explain what each part does.
+With this out of the way, let's take a look at some real CSS in the flesh. We will save this CSS in a file we call `base.css`. Comments will be left throughout to help explain what each part does.
 
 ```css
 h1 {
@@ -535,7 +535,7 @@ Before we move on, there are of course ways to override these rules, but you sho
 
 ### Linking CSS files to our webpage
 
-Now that we've learned how to read and write CSS, how will we link this in to our webpage to apply the styling changes? Easy enough, we use the [`<link>`](#link) tag!
+Now that we've learned how to read and write CSS, how will we link this in to our webpage to apply the styling changes? Easy enough, we use the [`<link>`](#linking-css-files-to-our-webpage) tag!
 
 Running down the list of properties for a `<link>`:
 
@@ -589,7 +589,7 @@ Now that we've discussed the basics of how to set up websites with HTML/CSS, we 
 
 ## Git Vs GitHub
 
-[Git](http://git-scm.com) is a version control system that lets people collaborate on different projects together. ACM as a whole uses it to keep track of our code, so let's take a look at its three main features!
+[Git](https://git-scm.com) is a version control system that lets people collaborate on different projects together. ACM as a whole uses it to keep track of our code, so let's take a look at its three main features!
 
 - Backing up your code so that other people can use it in the future, like Google Drive
 - Keeping a history of all the changes you made to your code, like Google Docs Edit History.

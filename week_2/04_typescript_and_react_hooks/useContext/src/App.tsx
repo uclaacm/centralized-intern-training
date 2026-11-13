@@ -1,55 +1,43 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { useState } from "react";
 import ContextPage from "./pages/ContextPage";
 import CustomHookPage from "./pages/CustomHookPage";
 import PropDrillingPage from "./pages/PropDrillingPage";
 
 import "./App.css";
 
+type Page = "custom" | "context" | "drilling";
+
 function App() {
+  const [page, setPage] = useState<Page | null>(null);
+
   return (
-    <Router>
-      <div className="App">
-        <div className="content-container">
-          <nav>
-            <div>
-              <Link to="/custom">
-                <button className="button-container">Custom Hooks</button>
-              </Link>
+    <div className="App">
+      <div className="content-container">
+        <nav>
+          <div>
+            <button className="button-container" onClick={() => setPage("custom")}>
+              Custom Hooks
+            </button>
+            <button className="button-container" onClick={() => setPage("context")}>
+              useContext
+            </button>
+            <button className="button-container" onClick={() => setPage("drilling")}>
+              Prop Drilling
+            </button>
+          </div>
+        </nav>
 
-              <Link to="/context">
-                <button className="button-container">useContext</button>
-              </Link>
-              <Link to="/drilling">
-                <button className="button-container">Prop Drilling</button>
-              </Link>
-            </div>
-          </nav>
+        {page === null && "Click a page on the top to get started!"}
 
-          <Switch>
-            <Route exact path="/">
-              Click a page on the top to get started!
-            </Route>
-
-            <Route path="/custom">
-              <div className="subcomponent-container">
-                <CustomHookPage />
-              </div>
-            </Route>
-            <Route path="/context">
-              <div className="subcomponent-container">
-                <ContextPage />
-              </div>
-            </Route>
-            <Route path="/drilling">
-              <div className="subcomponent-container">
-                <PropDrillingPage />
-              </div>
-            </Route>
-          </Switch>
-        </div>
+        {page !== null && (
+          <div className="subcomponent-container">
+            {page === "custom" && <CustomHookPage />}
+            {page === "context" && <ContextPage />}
+            {page === "drilling" && <PropDrillingPage />}
+          </div>
+        )}
       </div>
-    </Router>
+    </div>
   );
 }
 

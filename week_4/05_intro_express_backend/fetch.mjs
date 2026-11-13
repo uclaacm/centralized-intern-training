@@ -1,24 +1,26 @@
-import fetch from "node-fetch"
-
-const url = 'http://localhost:8081/json'
-
-fetch(url, {
-	'Content-Type': 'application/json'
-})
-	.then(response => response.json())
-	.then(data => console.log(data))
+const url = "http://localhost:8081/json";
 
 async function fetchData(url) {
-	const response = await fetch(url, {
-		'Content-Type': 'application/json'
-	})
-	console.log(response.status)
-	const data = await response.json()
-	return data
+  const response = await fetch(url, {
+    headers: { Accept: "application/json" },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Request failed with status ${response.status}`);
+  }
+
+  return response.json();
 }
 
-const data = await fetchData(url)
+const data = await fetchData(url);
+console.log(data);
 
-fetch('http://localhost:8081/hello')
-	.then(response => response.text())
-	.then(text => console.log(text))
+const created = await fetch("http://localhost:8081/posts", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ title: "Hello", body: "My first post" }),
+});
+console.log(created.status, await created.json());
+
+const hello = await fetch("http://localhost:8081/hello");
+console.log(await hello.text());
