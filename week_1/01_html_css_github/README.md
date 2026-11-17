@@ -648,7 +648,7 @@ When you run git init, you initialize a git repository in the directory of your 
 By running
 
 ```sh
-$ ls -a`
+$ ls -a
 ```
 
 you can see a `.git` directory now inside your project, which is where all the version control that comes with git is contained.
